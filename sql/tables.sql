@@ -48,11 +48,18 @@ CREATE TABLE line_item (
 
 CREATE TABLE note (
     id INT AUTO_INCREMENT PRIMARY KEY,
+    quote_id INT NOT NULL,
+    secret BOOLEAN DEFAULT false,
+    text TEXT DEFAULT '',
+    FOREIGN KEY(quote_id) REFERENCES quote(id)
 );
 \! echo " * note"
 
 CREATE TABLE order (
     id VARCHAR(50) PRIMARY KEY,
+    quote_id INT NOT NULL,
+    processed_timestamp TIMESTAMP NOT NULL,
+    FOREIGN KEY(quote_id) REFERENCES quote(id)
 );
 \! echo " * order"
 
