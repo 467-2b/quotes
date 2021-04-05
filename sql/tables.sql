@@ -3,7 +3,7 @@
 
 # Cleanup
 \! echo "Dropping tables if they exist..."
-DROP TABLE IF EXISTS order, note, line_item, quote, role, user;
+DROP TABLE IF EXISTS `order`, `note`, `line_item`, `quote`, `role`, `user`;
 \! echo "...done!"
 
 # Create tables
@@ -55,7 +55,7 @@ CREATE TABLE note (
 );
 \! echo " * note"
 
-CREATE TABLE order (
+CREATE TABLE `order` (
     id VARCHAR(50) PRIMARY KEY,
     quote_id INT NOT NULL,
     processed_timestamp TIMESTAMP NOT NULL,
