@@ -39,6 +39,10 @@ CREATE TABLE quote (
 
 CREATE TABLE line_item (
     id INT AUTO_INCREMENT PRIMARY KEY,
+    quote_id INT NOT NULL,
+    description VARCHAR(255) NOT NULL,
+    quantity INT NOT NULL,
+    FOREIGN KEY (quote_id) REFERENCES quote(id)
 );
 \! echo " * line_item"
 
