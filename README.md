@@ -6,6 +6,8 @@
 
 ## Setup Instructions
 
+The below instrrrctions are the steps needed to download all of the prerequesites on Ubuntu 20.04. It can be either a real Ubuntu or Ubuntu on WSL. Follow these instructions to set up Ubuntu 20.04 on WSL. https://wiki.ubuntu.com/WSL
+
 **Initial setup (automated)**
 ```sh
 # Install dependencies from apt
