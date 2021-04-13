@@ -39,5 +39,6 @@ sed -i '/DB_/s/^/#/' .env
 echo -e "DB_CONNECTION=sqlite\nDB_FOREIGN_KEYS=true" >> .env
 touch database/database.sqlite
 php artisan migrate
+php artisan db:seed
 npm install # pull down npm packages
 npm run dev # compile assets
