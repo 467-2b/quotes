@@ -3,6 +3,8 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class CreateUsersTable extends Migration
 {
@@ -22,10 +24,18 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
-            $table->string('address')->unique();
+            $table->string('address')->default('');
             $table->decimal('accumulated_commission', 9, 2)->default('0.00');
             
         });
+        DB::table('users')->insert([
+            'username' => 'admin',
+            'name' => 'Admin',
+            'email' => 'admin@example.com',
+            'password' => Hash::make('admin'),
+            'created_at' => \Carbon\Carbon::now(),
+            'updated_at' => \Carbon\Carbon::now(),
+        ]);
     }
 
     /**
