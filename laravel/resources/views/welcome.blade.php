@@ -23,13 +23,11 @@
                 overflow: hidden;
                 background-color: #333;
             }
-
             li {
                 float: left;
                 border-right: 1px solid #bbb;
                 font-size:20px;
             }
-
             li a {
                 display: block;
                 color: white;
@@ -37,37 +35,29 @@
                 padding: 14px 16px;
                 text-decoration: none;
             }
-
             li a:hover {
                 background-color: #111;
             }
-
             .active {
                 background-color: #4CAF50;
             }
-
             li:last-child {
                 border-right: none;
             }
-
             div.row {
                 column-count: 3;
             }
-
             div.gallery:hover {
                 border: 1px solid #777;
             }
-
             div.gallery img {
                 width: 100%;
                 height: auto;
             }
-
             div.desc {
                 padding: 15px;
                 text-align: center;
             }
-
             a.btn{
                 background-color: #4CAF50; /* Green */
                 border: none;
@@ -79,13 +69,11 @@
                 font-size: 16px;
                 border-radius: 8px;
             }
-
             div.col-lg-4 {
                 text-align:center;
 
                 display: block;
             }
-
             .top-left {
                 position: absolute;
                 top: 200px;
@@ -94,12 +82,9 @@
                 letter-spacing: 3px;
                 text-shadow: 10px 10px purple;
             }
-
             .mySlides {
                 display:none;
-                }
-
-
+            }
             .responsive {
                 width: 100%;
                 max-width: 400px;
@@ -108,7 +93,6 @@
         </style>
     </head>
     <body>
-
     <header>
 <ul>
         <li><a class="active" href="/">Home</a></li>
@@ -119,29 +103,19 @@
         <li style="float:right"><a class="active" href="/login">Sign In</a></li>
 </ul>
 </header>
-
         <main role="main">
     <div class="w3-content w3-section" style="max-width:2000px">
     <div class="top-left">Quote System</div>
     <img class="mySlides w3-animate-left" src="https://www.aggreko.com/-/media/aggreko/images/case-studies/2017-02-nuclear-power-plant-night.jpg?w=1500&hash=3DA63748CB025D8BB1E657F93FAD4527" class="responsive" style="width:100%">
-
     <img class="mySlides w3-animate-left" src="https://bramble-energy.com/wp-content/uploads/2018/06/nuclear_power_plant.jpg"    class="responsive" style="width:100%">
-
     <img class="mySlides w3-animate-left" src="https://upload.wikimedia.org/wikipedia/commons/2/29/Nuclear_power_plant_Isar_at_night.jpg"    class="responsive" style="width:100%">
 </div>
-
-
 <p>
-
-
 </p>
-
             <!-- Marketing messaging and featurettes
             ================================================== -->
             <!-- Wrap the rest of the page in another container to center all the content. -->
-
             <div class="container marketing">
-
                 <!-- Three columns of text below the carousel -->
                 <div class="row">
                     <div class="col-lg-4">
@@ -163,17 +137,13 @@
                         <p><a class="btn" href="#" role="button">View details &raquo;</a></p>
                     </div><!-- /.col-lg-4 -->
                 </div><!-- /.row -->
-
             </div><!-- /.container -->
-
-
             <!-- FOOTER -->
             <footer class="container">
                 <p class="float-right"><a href="#">Back to top</a></p>
                 <p>&copy; 2021 467 Group, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
             </footer>
         </main>
-
         <!-- Bootstrap core JavaScript
         ================================================== -->
         <!-- Placed at the end of the document so the pages load faster -->
@@ -183,7 +153,6 @@
         <script>
             var myIndex = 0;
             carousel();
-
             function carousel() {
                 var i;
                 var x = document.getElementsByClassName("mySlides");
