@@ -94,14 +94,16 @@
     </head>
     <body>
         <header>
-            <ul>
-                <li><a class="active" href="/">Home</a></li>
-                <li><a href="/quotes">Quotes</a></li>
-                <li><a href="/orders">Orders</a></li>
-                <li><a href="/users">Users</a></li>
-                <li><a href="/customers">Customers</a></li>
-                <li style="float:right"><a class="active" href="/login">Sign In</a></li>
-            </ul>
+            <nav class="navbar-expand-md navbar-dark fixed-top bg-dark">
+                <ul>
+                    <li><a class="active" href="/">Home</a></li>
+                    <li><a href="/quotes">Quotes</a></li>
+                    <li><a href="/orders">Orders</a></li>
+                    <li><a href="/users">Users</a></li>
+                    <li><a href="/customers">Customers</a></li>
+                    <li style="float:right"><a class="active" href="/login">Sign In</a></li>
+                </ul>
+            </nav>
         </header>
         <main role="main">
             <div class="w3-content w3-section" style="max-width:2000px">
