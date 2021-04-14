@@ -3,11 +3,10 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="description" content="">
-        <meta name="author" content="">
-        <link rel="icon" href="https://image.flaticon.com/icons/png/512/2131/2131042.png">
 
         <title>Quote System</title>
+
+        <link rel="icon" href="https://image.flaticon.com/icons/png/512/2131/2131042.png">
 
         <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/carousel/">
 
