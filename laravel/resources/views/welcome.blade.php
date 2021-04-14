@@ -96,12 +96,18 @@
         <header>
             <nav class="navbar-expand-md navbar-dark fixed-top bg-dark">
                 <ul>
-                    <li><a class="active" href="/">Home</a></li>
-                    <li><a href="/quotes">Quotes</a></li>
-                    <li><a href="/orders">Orders</a></li>
-                    <li><a href="/users">Users</a></li>
-                    <li><a href="/customers">Customers</a></li>
-                    <li style="float:right"><a class="active" href="/login">Sign In</a></li>
+                    <li><a class="active" href="/">Welcome</a></li>
+                    @if (Route::has('login'))
+                        @auth
+                            <li><a href="/quotes">Quotes</a></li>
+                            <li><a href="/orders">Orders</a></li>
+                            <li><a href="/users">Users</a></li>
+                            <li><a href="/customers">Customers</a></li>
+                            <li style="float:right"><a href="{{ url('/home') }}">Home</a></li>
+                        @else
+                            <li style="float:right"><a href="{{ route('login') }}">Sign In</a></li>
+                        @endauth
+                    @endif
                 </ul>
             </nav>
         </header>
