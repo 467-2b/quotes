@@ -93,25 +93,24 @@
         </style>
     </head>
     <body>
-    <header>
-<ul>
-        <li><a class="active" href="/">Home</a></li>
-        <li><a href="/quotes">Quotes</a></li>
-        <li><a href="/orders">Orders</a></li>
-        <li><a href="/users">Users</a></li>
-        <li><a href="/customers">Customers</a></li>
-        <li style="float:right"><a class="active" href="/login">Sign In</a></li>
-</ul>
-</header>
+        <header>
+            <ul>
+                <li><a class="active" href="/">Home</a></li>
+                <li><a href="/quotes">Quotes</a></li>
+                <li><a href="/orders">Orders</a></li>
+                <li><a href="/users">Users</a></li>
+                <li><a href="/customers">Customers</a></li>
+                <li style="float:right"><a class="active" href="/login">Sign In</a></li>
+            </ul>
+        </header>
         <main role="main">
-    <div class="w3-content w3-section" style="max-width:2000px">
-    <div class="top-left">Quote System</div>
-    <img class="mySlides w3-animate-left" src="https://www.aggreko.com/-/media/aggreko/images/case-studies/2017-02-nuclear-power-plant-night.jpg?w=1500&hash=3DA63748CB025D8BB1E657F93FAD4527" class="responsive" style="width:100%">
-    <img class="mySlides w3-animate-left" src="https://bramble-energy.com/wp-content/uploads/2018/06/nuclear_power_plant.jpg"    class="responsive" style="width:100%">
-    <img class="mySlides w3-animate-left" src="https://upload.wikimedia.org/wikipedia/commons/2/29/Nuclear_power_plant_Isar_at_night.jpg"    class="responsive" style="width:100%">
-</div>
-<p>
-</p>
+            <div class="w3-content w3-section" style="max-width:2000px">
+                <div class="top-left">Quote System</div>
+                <img class="mySlides w3-animate-left" src="https://www.aggreko.com/-/media/aggreko/images/case-studies/2017-02-nuclear-power-plant-night.jpg?w=1500&hash=3DA63748CB025D8BB1E657F93FAD4527" class="responsive" style="width:100%">
+                <img class="mySlides w3-animate-left" src="https://bramble-energy.com/wp-content/uploads/2018/06/nuclear_power_plant.jpg"    class="responsive" style="width:100%">
+                <img class="mySlides w3-animate-left" src="https://upload.wikimedia.org/wikipedia/commons/2/29/Nuclear_power_plant_Isar_at_night.jpg"    class="responsive" style="width:100%">
+            </div>
+            <p></p>
             <!-- Marketing messaging and featurettes
             ================================================== -->
             <!-- Wrap the rest of the page in another container to center all the content. -->
