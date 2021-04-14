@@ -1,98 +1,5 @@
 <!doctype html>
 <html lang="en">
-<style>
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: #333;
-}
-
-li {
-  float: left;
-  border-right: 1px solid #bbb;
-  font-size:20px;
-}
-
-li a {
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-}
-
-li a:hover {
-  background-color: #111;
-}
-
-.active {
-  background-color: #4CAF50;
-}
-
-li:last-child {
-  border-right: none;
-}
-
-div.row {
-  column-count: 3;
-}
-
-div.gallery:hover {
-  border: 1px solid #777;
-}
-
-div.gallery img {
-  width: 100%;
-  height: auto;
-}
-
-div.desc {
-  padding: 15px;
-  text-align: center;
-}
-
-a.btn{
-  background-color: #4CAF50; /* Green */
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  border-radius: 8px;
-}
-
-div.col-lg-4 {
-  text-align:center;
-
-  display: block;
-}
-
-.top-left {
-  position: absolute;
-  top: 200px;
-  font-size:300px;
-  left: 100px;
-  letter-spacing: 3px;
-  text-shadow: 10px 10px purple;
-}
-
-.mySlides {
-  display:none;
-  }
-
-
-.responsive {
-  width: 100%;
-  max-width: 400px;
-  height: auto;
-}
-</style>
-
-
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -109,6 +16,97 @@ div.col-lg-4 {
 
     <!-- Custom styles for this template -->
     <link href="carousel.css" rel="stylesheet">
+    <style>
+      ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #333;
+      }
+
+      li {
+        float: left;
+        border-right: 1px solid #bbb;
+        font-size:20px;
+      }
+
+      li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+      }
+
+      li a:hover {
+        background-color: #111;
+      }
+
+      .active {
+        background-color: #4CAF50;
+      }
+
+      li:last-child {
+        border-right: none;
+      }
+
+      div.row {
+        column-count: 3;
+      }
+
+      div.gallery:hover {
+        border: 1px solid #777;
+      }
+
+      div.gallery img {
+        width: 100%;
+        height: auto;
+      }
+
+      div.desc {
+        padding: 15px;
+        text-align: center;
+      }
+
+      a.btn{
+        background-color: #4CAF50; /* Green */
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        border-radius: 8px;
+      }
+
+      div.col-lg-4 {
+        text-align:center;
+
+        display: block;
+      }
+
+      .top-left {
+        position: absolute;
+        top: 200px;
+        font-size:300px;
+        left: 100px;
+        letter-spacing: 3px;
+        text-shadow: 10px 10px purple;
+      }
+
+      .mySlides {
+        display:none;
+        }
+
+
+      .responsive {
+        width: 100%;
+        max-width: 400px;
+        height: auto;
+      }
+    </style>
   </head>
   <body>
 
