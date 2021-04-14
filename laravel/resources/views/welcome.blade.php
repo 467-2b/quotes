@@ -89,7 +89,7 @@ div.col-lg-4 {
   width: 100%;
   max-width: 400px;
   height: auto;
-
+}
 </style>
 
 
