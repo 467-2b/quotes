@@ -1,30 +1,47 @@
-        <header>
-            <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-                <a class="navbar-brand" href="#">Carousel</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarCollapse">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="/">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/quotes">Quotes</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/orders">Orders</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/users">Users</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/customers">Customers</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/login">Sign In</a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </header>
+<style>
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+li {
+  float: left;
+  border-right: 1px solid #bbb;
+  font-size:20px;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover {
+  background-color: #111;
+}
+
+.active {
+  background-color: #4CAF50;
+}
+
+li:last-child {
+  border-right: none;
+}
+
+</style>
+
+<header>
+<ul>
+    <li><a class="active" href="/">Home</a></li>
+    <li><a href="/quotes">Quotes</a></li>
+    <li><a href="/orders">Orders</a></li>
+    <li><a href="/users">Users</a></li>
+    <li><a href="/customers">Customers</a></li>
+    <li style="float:right"><a class="active" href="/login">Sign In</a></li>
+</ul>
+</header>

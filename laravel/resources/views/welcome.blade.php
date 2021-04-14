@@ -12,6 +12,7 @@ ul {
 li {
   float: left;
   border-right: 1px solid #bbb;
+  font-size:20px;
 }
 
 li a {
@@ -47,18 +48,21 @@ div.gallery img {
   height: auto;
 }
 
-div.block{
-  white-space: nowrap;
-}
-
-div.block *{
-  margin: auto;
-  display: block;
-}
-
 div.desc {
   padding: 15px;
   text-align: center;
+}
+
+a.btn{
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 8px;
 }
 
 div.col-lg-4 {
@@ -67,24 +71,34 @@ div.col-lg-4 {
   display: block;
 }
 
-.mySlides {display:none;}
+.top-left {
+  position: absolute;
+  top: 200px;
+  font-size:300px;
+  left: 100px;
+  letter-spacing: 3px;
+  text-shadow: 10px 10px purple;
+}
+
+.mySlides {
+  display:none;
+  }
+
 
 .responsive {
   width: 100%;
   max-width: 400px;
   height: auto;
 
-
 </style>
 
-<head>
+
+  <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="https://image.flaticon.com/icons/png/512/2131/2131042.png">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
     <title>Quote System</title>
 
@@ -95,10 +109,10 @@ div.col-lg-4 {
 
     <!-- Custom styles for this template -->
     <link href="carousel.css" rel="stylesheet">
-</head>
-<body>
+  </head>
+  <body>
 
-<header>
+  <header>
 <ul>
     <li><a class="active" href="/">Home</a></li>
     <li><a href="/quotes">Quotes</a></li>
@@ -110,50 +124,58 @@ div.col-lg-4 {
 </header>
 
     <main role="main">
-    <!-- Marketing messaging and featurettes
-    ================================================== -->
-    <!-- Wrap the rest of the page in another container to center all the content. -->
-<div class="w3-content w3-section" style="max-width:2000px">
-  <img class="mySlides w3-animate-left" src="https://images.unsplash.com/photo-1489257712451-3a66755ca19c?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1000&q=80" class="responsive" style="width:100%">
-  <img class="mySlides w3-animate-left" src="https://images.unsplash.com/photo-1492619267744-8edba0f56ab2?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"  class="responsive" style="width:100%">
-  <img class="mySlides w3-animate-left" src="https://images.unsplash.com/photo-1481887328591-3e277f9473dc?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1000&q=80"  class="responsive" style="width:100%">
+  <div class="w3-content w3-section" style="max-width:2000px">
+  <div class="top-left">Quote System</div>
+  <img class="mySlides w3-animate-left" src="https://www.aggreko.com/-/media/aggreko/images/case-studies/2017-02-nuclear-power-plant-night.jpg?w=1500&hash=3DA63748CB025D8BB1E657F93FAD4527" class="responsive" style="width:100%">
+
+  <img class="mySlides w3-animate-left" src="https://bramble-energy.com/wp-content/uploads/2018/06/nuclear_power_plant.jpg"  class="responsive" style="width:100%">
+
+  <img class="mySlides w3-animate-left" src="https://upload.wikimedia.org/wikipedia/commons/2/29/Nuclear_power_plant_Isar_at_night.jpg"  class="responsive" style="width:100%">
 </div>
 
-<div class="block">
-    <!-- Three columns of text below the carousel -->
-    <div class="row">
-        <div class="col-lg-4">
-            <img class="rounded-circle" src="https://cdn2.iconfinder.com/data/icons/computer-roundline/512/computer-512.png" alt="Generic placeholder image" width="140" height="140">
-            <h2>Heading</h2>
-            <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
-            <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
-        </div><!-- /.col-lg-4 -->
-        
-        <div class="col-lg-4">
-            <img class="rounded-circle" src="https://cdn2.iconfinder.com/data/icons/computer-roundline/512/computer-512.png" alt="Generic placeholder image" width="140" height="140">
-            <h2>Heading</h2>
-            <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.</p>
-            <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
-        </div><!-- /.col-lg-4 -->
-        
-        <div class="col-lg-4">
-            <img class="rounded-circle" src="https://cdn2.iconfinder.com/data/icons/computer-roundline/512/computer-512.png" alt="Generic placeholder image" width="140" height="140">
-            <h2>Heading</h2>
-            <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-            <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
-        </div><!-- /.col-lg-4 -->
-    </div><!-- /.row -->
-</div>
 
-</main>
-</body>
-</html>
+<p>
 
-    <!-- FOOTER -->
-    <footer class="container">
-        <p style="float-right"><a href="#">Back to top</a></p>
+
+</p>
+
+      <!-- Marketing messaging and featurettes
+      ================================================== -->
+      <!-- Wrap the rest of the page in another container to center all the content. -->
+
+      <div class="container marketing">
+
+        <!-- Three columns of text below the carousel -->
+        <div class="row">
+          <div class="col-lg-4">
+            <img class="rounded-circle" src="https://cdn2.iconfinder.com/data/icons/computer-roundline/512/computer-512.png" alt="Generic placeholder image" width="140" height="140">
+            <h2>Create</h2>
+            <p>Create, edit, and finalize quotes for customers. Add line items and notes.</p>
+            <p><a class="btn" href="#" role="button">View details &raquo;</a></p>
+          </div><!-- /.col-lg-4 -->
+          <div class="col-lg-4">
+            <img class="rounded-circle" src="https://cdn2.iconfinder.com/data/icons/computer-roundline/512/computer-512.png" alt="Generic placeholder image" width="140" height="140">
+            <h2>Review</h2>
+            <p>Review, update, and sanction finalized quotes.</p>
+            <p><a class="btn" href="#" role="button">View details &raquo;</a></p>
+          </div><!-- /.col-lg-4 -->
+          <div class="col-lg-4">
+            <img class="rounded-circle" src="https://cdn2.iconfinder.com/data/icons/computer-roundline/512/computer-512.png" alt="Generic placeholder image" width="140" height="140">
+            <h2>Convert</h2>
+            <p>Convert quotes into purchase orders to be sent to an external processing system.</p>
+            <p><a class="btn" href="#" role="button">View details &raquo;</a></p>
+          </div><!-- /.col-lg-4 -->
+        </div><!-- /.row -->
+
+      </div><!-- /.container -->
+
+
+      <!-- FOOTER -->
+      <footer class="container">
+        <p class="float-right"><a href="#">Back to top</a></p>
         <p>&copy; 2021 467 Group, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
-    </footer>
+      </footer>
+    </main>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
@@ -164,8 +186,8 @@ div.col-lg-4 {
     <script src="../../dist/js/bootstrap.min.js"></script>
     <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
     <script src="../../assets/js/vendor/holder.min.js"></script>
-
-
+  </body>
+</html>
 
 <script>
 var myIndex = 0;
@@ -183,4 +205,3 @@ function carousel() {
   setTimeout(carousel, 2500);    
 }
 </script>
-
