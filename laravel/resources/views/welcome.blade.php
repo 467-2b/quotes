@@ -65,7 +65,7 @@
                         <div class="container">
                             <div class="carousel-caption">
                                 <h1>Quotes System</h1>
-                                <p>Some representative placeholder content for the first slide of the carousel.</p>
+                                <p>Create, review, and convert quotes for plant repair.</p>
                                 <p><br/></p>
                             </div>
                         </div>
@@ -76,7 +76,7 @@
                         <div class="container">
                             <div class="carousel-caption" style="color:black;">
                                 <h1>Quotes System</h1>
-                                <p>Some representative placeholder content for the second slide of the carousel.</p>
+                                <p>Create, review, and convert quotes for plant repair.</p>
                                 <p><br/></p>
                             </div>
                         </div>
