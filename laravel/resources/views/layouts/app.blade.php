@@ -53,6 +53,9 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                @if (Route::has('users'))
+                                    <a class="dropdown-item" href="{{ route('users') }}">{{ __('Users') }}</a>
+                                @endif
                                 @if (Route::has('register'))
                                     <a class="dropdown-item" href="{{ route('register') }}">{{ __('New User') }}</a>
                                 @endif
