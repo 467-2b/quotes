@@ -10,7 +10,6 @@
 
         <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/carousel/">
 
-        <!-- Bootstrap core CSS -->
         <link rel="stylesheet" href="/css/app.css">
 
         <!-- Custom styles for this template -->
@@ -44,22 +43,8 @@
             li:last-child {
                 border-right: none;
             }
-            div.row {
-                column-count: 3;
-            }
-            div.gallery:hover {
-                border: 1px solid #777;
-            }
-            div.gallery img {
-                width: 100%;
-                height: auto;
-            }
-            div.desc {
-                padding: 15px;
-                text-align: center;
-            }
             a.btn{
-                background-color: #4CAF50; /* Green */
+                background-color: #4CAF50;
                 border: none;
                 color: white;
                 padding: 15px 32px;
@@ -69,33 +54,9 @@
                 font-size: 16px;
                 border-radius: 8px;
             }
-            div.col-lg-4 {
-                text-align:center;
-
-                display: block;
-            }
-            .top-left {
-                position: absolute;
-                margin: auto;
-                top: 200px;
-                font-size:140px;
-                letter-spacing: 3px;
-                align-items: center;
-                justify-content: center;
-                text-align: center;
-                color: white;
-                font-weight: bolder;
-                -webkit-text-stroke-width: 2px;
-                -webkit-text-stroke-color: black;
-                padding: 60px;
-            }
-            .mySlides {
-                display:none;
-            }
-            .responsive {
-                width: 100%;
-                max-width: 400px;
-                height: auto;
+            .carousel-caption h1 {
+                font-size: 600%;
+                font-weight: bold;
             }
         </style>
     </head>
@@ -119,12 +80,44 @@
             </nav>
         </header>
         <main role="main">
-            <div class="w3-content w3-section" style="max-width:2000px">
-                <div class="top-left">Quote System</div>
-                <img class="mySlides w3-animate-left" src="/img/cover-light.jpg" class="responsive" style="width:100%">
-                <img class="mySlides w3-animate-left" src="/img/cover-dark.jpg"    class="responsive" style="width:100%">
+            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                    <li data-target="#myCarousel" data-slide-to="1"></li>
+                </ol>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="/img/cover-dark.jpg" width="100%" height="100%" />
+
+                        <div class="container">
+                            <div class="carousel-caption">
+                                <h1>Quotes System</h1>
+                                <p>Some representative placeholder content for the first slide of the carousel.</p>
+                                <p><br/></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                    <img src="/img/cover-light.jpg" width="100%" height="100%" />
+
+                        <div class="container">
+                            <div class="carousel-caption" style="color:black;">
+                                <h1>Quotes System</h1>
+                                <p>Some representative placeholder content for the second slide of the carousel.</p>
+                                <p><br/></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
             </div>
-            <p></p>
             <!-- Marketing messaging and featurettes
             ================================================== -->
             <!-- Wrap the rest of the page in another container to center all the content. -->
@@ -135,19 +128,16 @@
                         <img class="rounded-circle" src="https://cdn2.iconfinder.com/data/icons/computer-roundline/512/computer-512.png" alt="Generic placeholder image" width="140" height="140">
                         <h2>Create</h2>
                         <p>Create, edit, and finalize quotes for customers. Add line items and notes.</p>
-                        <p><a class="btn" href="#" role="button">View details &raquo;</a></p>
                     </div><!-- /.col-lg-4 -->
                     <div class="col-lg-4">
                         <img class="rounded-circle" src="https://cdn2.iconfinder.com/data/icons/computer-roundline/512/computer-512.png" alt="Generic placeholder image" width="140" height="140">
                         <h2>Review</h2>
                         <p>Review, update, and sanction finalized quotes.</p>
-                        <p><a class="btn" href="#" role="button">View details &raquo;</a></p>
                     </div><!-- /.col-lg-4 -->
                     <div class="col-lg-4">
                         <img class="rounded-circle" src="https://cdn2.iconfinder.com/data/icons/computer-roundline/512/computer-512.png" alt="Generic placeholder image" width="140" height="140">
                         <h2>Convert</h2>
                         <p>Convert quotes into purchase orders to be sent to an external processing system.</p>
-                        <p><a class="btn" href="#" role="button">View details &raquo;</a></p>
                     </div><!-- /.col-lg-4 -->
                 </div><!-- /.row -->
             </div><!-- /.container -->
@@ -163,20 +153,5 @@
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
         <script>window.jQuery || document.write('<script src="js/jquery-3.5.1.slim.min.js"><\/script>')</script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
-        <script>
-            var myIndex = 0;
-            carousel();
-            function carousel() {
-                var i;
-                var x = document.getElementsByClassName("mySlides");
-                for (i = 0; i < x.length; i++) {
-                    x[i].style.display = "none";    
-                }
-                myIndex++;
-                if (myIndex > x.length) {myIndex = 1}        
-                x[myIndex-1].style.display = "block";    
-                setTimeout(carousel, 2500);        
-            }
-        </script>
     </body>
 </html>
