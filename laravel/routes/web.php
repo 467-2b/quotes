@@ -24,3 +24,7 @@ Route::get('/users', function () {
     $users = DB::table('users')->get();
     return view('users', ['users' => $users]);
 })->name('users');
+Route::get('/user/{username}', function ($username) {
+    $user = DB::table('users')->where('username', $username)->first();
+    return view('user', ['user' => $user]);
+})->name('user');

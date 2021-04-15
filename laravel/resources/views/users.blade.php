@@ -18,7 +18,6 @@
                             <table class="table table-striped table-hover table-condensed">
                                 <thead>
                                 <tr>
-                                    <th><input name="id" value="all" type="checkbox" /></th>
                                     <th>Username</th>
                                     <th>Name</th>
                                     <th>Email-Address</th>
@@ -29,8 +28,7 @@
                                 <tbody>
                                 @foreach($users as $user)
                                     <tr>
-                                        <td><input name="id" value="{{$user->id}}" type="checkbox" /></td>
-                                        <td>{{$user->username}}</td>
+                                        <td><a href="/user/{{$user->username}}">{{$user->username}}</a></td>
                                         <td>{{$user->name}}</td>
                                         <td>{{$user->email}}</td>
                                         <td>{{$user->address}}</td>
@@ -40,6 +38,7 @@
                                 </tbody>
                             </table>
                         </form>
+                        <a class="btn btn-primary" href="/register" role="button">Add new user</a>
                     </div>
                 </div>
             </div>
