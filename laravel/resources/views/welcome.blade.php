@@ -11,7 +11,7 @@
         <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/carousel/">
 
         <!-- Bootstrap core CSS -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+        <link rel="stylesheet" href="/css/app.css">
 
         <!-- Custom styles for this template -->
         <link href="css/carousel.css" rel="stylesheet">
@@ -76,11 +76,18 @@
             }
             .top-left {
                 position: absolute;
+                margin: auto;
                 top: 200px;
-                font-size:300px;
-                left: 100px;
+                font-size:140px;
                 letter-spacing: 3px;
-                text-shadow: 10px 10px purple;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                color: white;
+                font-weight: bolder;
+                -webkit-text-stroke-width: 2px;
+                -webkit-text-stroke-color: black;
+                padding: 60px;
             }
             .mySlides {
                 display:none;
@@ -114,9 +121,8 @@
         <main role="main">
             <div class="w3-content w3-section" style="max-width:2000px">
                 <div class="top-left">Quote System</div>
-                <img class="mySlides w3-animate-left" src="https://www.aggreko.com/-/media/aggreko/images/case-studies/2017-02-nuclear-power-plant-night.jpg?w=1500&hash=3DA63748CB025D8BB1E657F93FAD4527" class="responsive" style="width:100%">
-                <img class="mySlides w3-animate-left" src="https://bramble-energy.com/wp-content/uploads/2018/06/nuclear_power_plant.jpg"    class="responsive" style="width:100%">
-                <img class="mySlides w3-animate-left" src="https://upload.wikimedia.org/wikipedia/commons/2/29/Nuclear_power_plant_Isar_at_night.jpg"    class="responsive" style="width:100%">
+                <img class="mySlides w3-animate-left" src="/img/cover-light.jpg" class="responsive" style="width:100%">
+                <img class="mySlides w3-animate-left" src="/img/cover-dark.jpg"    class="responsive" style="width:100%">
             </div>
             <p></p>
             <!-- Marketing messaging and featurettes
