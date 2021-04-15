@@ -1,47 +1,29 @@
-<style>
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: #333;
-}
-
-li {
-  float: left;
-  border-right: 1px solid #bbb;
-  font-size:20px;
-}
-
-li a {
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-}
-
-li a:hover {
-  background-color: #111;
-}
-
-.active {
-  background-color: #4CAF50;
-}
-
-li:last-child {
-  border-right: none;
-}
-
-</style>
-
-<header>
-<ul>
-    <li><a class="active" href="/">Home</a></li>
-    <li><a href="/quotes">Quotes</a></li>
-    <li><a href="/orders">Orders</a></li>
-    <li><a href="/users">Users</a></li>
-    <li><a href="/customers">Customers</a></li>
-    <li style="float:right"><a class="active" href="/login">Sign In</a></li>
-</ul>
-</header>
+        <header>
+            <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active"><a  class="nav-link active" href="/">Welcome</a></li>
+                        @if (Route::has('login'))
+                            @auth
+                                <li class="nav-item"><a class="nav-link" href="/quotes">Quotes</a></li>
+                                <li class="nav-item"><a class="nav-link" href="/orders">Orders</a></li>
+                                <li class="nav-item"><a class="nav-link" href="/users">Users</a></li>
+                                <li class="nav-item"><a class="nav-link" href="/customers">Customers</a></li>
+                            @endauth
+                        @endif
+                    </ul>
+                    <ul class="navbar-nav ml-auto class="mt-2 mt-md-0" style="float:right">
+                    @if (Route::has('login'))
+                        @auth
+                            <li class="nav-item"><a class="nav-link" href="{{ url('/home') }}">Home</a></li>
+                        @else
+                            <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Sign In</a></li>
+                        @endauth
+                    @endif
+                    </ul>
+                </div>
+            </nav>
+        </header>
