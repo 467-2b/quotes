@@ -125,17 +125,17 @@
                 <!-- Three columns of text below the carousel -->
                 <div class="row">
                     <div class="col-lg-4">
-                        <img class="rounded-circle" src="https://cdn2.iconfinder.com/data/icons/computer-roundline/512/computer-512.png" alt="Generic placeholder image" width="140" height="140">
+                        <img class="rounded-circle" src="/img/writing.jpg" alt="Create" width="140" height="140">
                         <h2>Create</h2>
                         <p>Create, edit, and finalize quotes for customers. Add line items and notes.</p>
                     </div><!-- /.col-lg-4 -->
                     <div class="col-lg-4">
-                        <img class="rounded-circle" src="https://cdn2.iconfinder.com/data/icons/computer-roundline/512/computer-512.png" alt="Generic placeholder image" width="140" height="140">
+                        <img class="rounded-circle" src="/img/welding.jpg" alt="Review" width="140" height="140">
                         <h2>Review</h2>
                         <p>Review, update, and sanction finalized quotes.</p>
                     </div><!-- /.col-lg-4 -->
                     <div class="col-lg-4">
-                        <img class="rounded-circle" src="https://cdn2.iconfinder.com/data/icons/computer-roundline/512/computer-512.png" alt="Generic placeholder image" width="140" height="140">
+                        <img class="rounded-circle" src="/img/cash-register.jpg" alt="Convert" width="140" height="140">
                         <h2>Convert</h2>
                         <p>Convert quotes into purchase orders to be sent to an external processing system.</p>
                     </div><!-- /.col-lg-4 -->
