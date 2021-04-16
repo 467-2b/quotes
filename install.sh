@@ -31,14 +31,4 @@ curl -fsSL https://deb.nodesource.com/setup_15.x | sudo -E bash -
 sudo apt-get install -y nodejs
 
 # Prepare project
-cd laravel
-composer install # pull down lots of packages, may take 10+ minutes if not cached
-cp .env.example .env # copy example .env configuration, missing APP_KEY
-php artisan key:generate # fill in the APP_KEY in the .env file
-sed -i '/DB_/s/^/#/' .env
-echo -e "DB_CONNECTION=sqlite\nDB_FOREIGN_KEYS=true" >> .env
-touch database/database.sqlite
-php artisan migrate
-php artisan db:seed
-npm install # pull down npm packages
-npm run dev # compile assets
+./prepare-project.sh
