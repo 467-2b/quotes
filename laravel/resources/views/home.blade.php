@@ -22,7 +22,7 @@
                             </a>
                         </div>
                         <div class="p-5">
-                            <a href="/customers" alt="Customers" title="Customers" class="text-dark text-decoration-none">
+                            <a href={{ route('customers') }} alt="Customers" title="Customers" class="text-dark text-decoration-none">
                                 <img src="/img/notepad.png" height=128 width=128 alt="Customers">
                                 <p class="text-center font-weight-bold">Customers</p>
                             </a>

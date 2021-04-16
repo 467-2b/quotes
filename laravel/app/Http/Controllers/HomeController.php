@@ -28,4 +28,17 @@ class HomeController extends Controller
                 $commission = DB::table('users')->where('id', Auth::user()->id)->first()->accumulated_commission;
                 return view('home', ['commission' => $commission]);
     }
+
+
+    public function customers(){
+        return view('customers');
+    }
+
+    public function quotes(){
+            return view('quotes');
+    }
+
+    public function orders(){
+        return view('orders');
+    }
 }
