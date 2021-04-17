@@ -19,6 +19,7 @@ class CreateQuotesTable extends Migration
             $table->integer('associate_id');
             $table->enum('status', ["unfinalized", "finalized", "sanctioned", "processed"])->default('unfinalized');
             $table->string('customer_name');
+            $table->string('customer_email');
             $table->decimal('discount_amount', 9, 2)->default(0.0);
             $table->decimal('discount_percent', 2, 0)->default(0.0);
             $table->decimal('total_amount', 9, 2)->default(0.0);
