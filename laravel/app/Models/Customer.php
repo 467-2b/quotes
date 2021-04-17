@@ -10,5 +10,5 @@ class Customer extends Model
     use HasFactory;
     protected $connection = 'legacydb';
     protected $table = 'customers';
-    protected $timestamps = false;
+    public $timestamps = false;
 }
