@@ -41,4 +41,8 @@ class HomeController extends Controller
     public function orders(){
         return view('orders');
     }
+
+    public function newquote(){
+        return view('newquote');
+}
 }

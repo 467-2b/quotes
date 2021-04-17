@@ -16,8 +16,14 @@
                     <!-- Big icons -->
                     <div class="d-flex flex-wrap p-1 mx-auto">
                         <div class="p-5">
-                            <a href="/quotes" alt="New Quotes" title="New Quotes" class="text-dark text-decoration-none">
-                                <img src="/img/chat.png" height=128 width=128 alt="New Quote">
+                            <a href={{ route('newquote') }} alt="New Quote" title="New Quote" class="text-dark text-decoration-none">
+                                <img src="/img/box.png" height=128 width=128 alt="New Quote">
+                                <p class="text-center font-weight-bold">New Quote</p>
+                            </a>
+                        </div>
+                        <div class="p-5">
+                            <a href={{ route('quotes') }} alt="Quotes" title="Quotes" class="text-dark text-decoration-none">
+                                <img src="/img/chat.png" height=128 width=128 alt="Quotes">
                                 <p class="text-center font-weight-bold">Quotes</p>
                             </a>
                         </div>
@@ -28,21 +34,15 @@
                             </a>
                         </div>
                         <div class="p-5">
-                            <a href="/users" alt="Users" title="Users" class="text-dark text-decoration-none">
+                            <a href={{ route('users') }}" alt="Users" title="Users" class="text-dark text-decoration-none">
                                 <img src="/img/team.png" height=128 width=128 alt="Users">
                                 <p class="text-center font-weight-bold">Users</p>
                             </a>
                         </div>
                         <div class="p-5">
-                            <a href="/orders" alt="Orders" title="Orders" class="text-dark text-decoration-none">
-                                <img src="/img/folder.png" height=128 width=128 alt="Orders">
+                            <a href={{ route('orders') }} alt="Orders" title="Orders" class="text-dark text-decoration-none">
+                                <img src="/img/trolley.png" height=128 width=128 alt="Orders">
                                 <p class="text-center font-weight-bold">Orders</p>
-                            </a>
-                        </div>
-                        <div class="p-5">
-                            <a href="/users" alt="Users" title="Users" class="text-dark text-decoration-none">
-                                <img src="/img/coins.png" height=128 width=128 alt="Uhh idk">
-                                <p class="text-center font-weight-bold">?</p>
                             </a>
                         </div>
                     </div>
