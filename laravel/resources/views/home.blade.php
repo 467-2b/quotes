@@ -34,7 +34,7 @@
                             </a>
                         </div>
                         <div class="p-5">
-                            <a href={{ route('users') }}" alt="Users" title="Users" class="text-dark text-decoration-none">
+                            <a href={{ route('users') }} alt="Users" title="Users" class="text-dark text-decoration-none">
                                 <img src="/img/team.png" height=128 width=128 alt="Users">
                                 <p class="text-center font-weight-bold">Users</p>
                             </a>
