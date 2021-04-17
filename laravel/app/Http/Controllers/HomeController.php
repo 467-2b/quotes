@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Customer;
 
 class HomeController extends Controller
 {
@@ -25,13 +26,14 @@ class HomeController extends Controller
      */
     public function index()
     {
-                $commission = DB::table('users')->where('id', Auth::user()->id)->first()->accumulated_commission;
-                return view('home', ['commission' => $commission]);
+        $commission = DB::table('users')->where('id', Auth::user()->id)->first()->accumulated_commission;
+        return view('home', ['commission' => $commission]);
     }
 
 
     public function customers(){
-        return view('customers');
+        $customers = Customer::all();
+        return view('customers', ['customers' => $customers]);
     }
 
     public function quotes(){
