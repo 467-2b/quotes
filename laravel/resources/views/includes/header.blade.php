@@ -8,10 +8,10 @@
                         <li class="nav-item active"><a  class="nav-link active" href="/">Welcome</a></li>
                         @if (Route::has('login'))
                             @auth
-                                <li class="nav-item"><a class="nav-link" href="/quotes">Quotes</a></li>
-                                <li class="nav-item"><a class="nav-link" href="/orders">Orders</a></li>
+                                <li class="nav-item"><a class="nav-link" href="{{ route('quotes') }}">Quotes</a></li>
+                                <li class="nav-item"><a class="nav-link" href="{{ route('orders') }}">Orders</a></li>
                                 <li class="nav-item"><a class="nav-link" href="/users">Users</a></li>
-                                <li class="nav-item"><a class="nav-link" href="/customers">Customers</a></li>
+                                <li class="nav-item"><a class="nav-link" href="{{ route('customers') }}">Customers</a></li>
                             @endauth
                         @endif
                     </ul>
