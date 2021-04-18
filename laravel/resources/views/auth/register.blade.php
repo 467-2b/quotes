@@ -89,6 +89,30 @@
                             </div>
                         </div>
 
+                        <div class="form-group row">
+                            <label for="roles" class="col-md-4 col-form-label text-md-right">{{ __('Role') }}</label>
+                            <div class="col-md-6 d-flex justify-content-center">
+                                <div class="form-check-inline pr-3" id="roles">
+                                    <input class="form-check-input" type="radio" name="role" value="sales" id="sales" checked>
+                                    <label class="form-check-label btn" for="sales">
+                                        Sales
+                                    </label>
+                                </div>
+                                <div class="form-check-inline pr-3">
+                                    <input class="form-check-input" type="radio" name="role" value="clerk" id="clerk">
+                                    <label class="form-check-label btn" for="clerk">
+                                        Clerk
+                                    </label>
+                                </div>
+                                <div class="form-check-inline">
+                                    <input class="form-check-input" type="radio" name="role" value="admin" id="admin">
+                                    <label class="form-check-label btn" for="admin">
+                                        Admin
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
