@@ -21,7 +21,7 @@ The application connects to two databases.
 
 > * user_id references user(id)
 
-**quote**(<ins>id</ins>, customer_id †, associate_id †, status, create_timestamp, customer_name, discount_amount, iscount_percent, total_amount, comission_percent)
+**quote**(<ins>id</ins>, customer_id †, associate_id †, status, create_timestamp, customer_name, customer_email, discount_amount, iscount_percent, total_amount, comission_percent)
 
 > * customer_id references a table attribute, *customer(id)*, in another database, *csci467*, so it is not  a foreign key in in the table schema, but the constraint will be managed by the application instead
 > * associate_id references user(id) 
@@ -86,6 +86,7 @@ The application connects to two databases.
 | status              | ENUM          | ("unsanctioned", "sanctioned", "processed")  | sanctioned  | quote status                                       |
 | create_timestamp    | TIMESTAMP     | unix time                                    | 1617540140  | time quote was created                             |
 | customer_name       | VARCHAR(255)  | words                                        | Asus Tech   | customer(name)                                     |
+| customer_email      | VARCHAR(255)  | email                                        | me@ex.com   | customer email                                     |
 | discount_amount     | DECIMAL(9,2)  | 0.00 to 9,999,999.99                         | 25.00       | dollar amount to subtract from the quote subtotal  |
 | discount_percent    | DECIMAL(2,0)  | 00 to 99                                     | 10          | percent to remove from the subtotal                |
 | total_amount        | DECIMAL(9,2)  | 0.00 to 9,999,999.99                         | 1,500.00    | running total of all items                         |
