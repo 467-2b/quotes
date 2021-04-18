@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\DB;
 
 class CreatePermissionTables extends Migration
 {
@@ -29,6 +30,65 @@ class CreatePermissionTables extends Migration
             $table->unique(['name', 'guard_name']);
         });
 
+        DB::table('permissions')->insert([
+            [
+                'name' => 'create user',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'edit user',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'create quote',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'view own quote',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'edit own quote',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'view finalized quote',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'edit finalized quote',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'view any quote',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'edit any quote',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'finalize quote',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'sanction quote',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'convert quote',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'add discount to finalized quote',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'view processed order',
+                'guard_name' => 'web'
+            ],
+        ]);
+
         Schema::create($tableNames['roles'], function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');       // For MySQL 8.0 use string('name', 125);
@@ -37,6 +97,21 @@ class CreatePermissionTables extends Migration
 
             $table->unique(['name', 'guard_name']);
         });
+
+        DB::table('roles')->insert([
+            [
+                'name' => 'admin',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'clerk',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'sales',
+                'guard_name' => 'web'
+            ],
+        ]);
 
         Schema::create($tableNames['model_has_permissions'], function (Blueprint $table) use ($tableNames, $columnNames) {
             $table->unsignedBigInteger('permission_id');
@@ -86,6 +161,61 @@ class CreatePermissionTables extends Migration
 
             $table->primary(['permission_id', 'role_id'], 'role_has_permissions_permission_id_role_id_primary');
         });
+
+        DB::table('role_has_permissions')->insert([
+            [
+                'permission_id' => 1,
+                'role_id' => 1
+            ],
+            [
+                'permission_id' => 2,
+                'role_id' => 1
+            ],
+            [
+                'permission_id' => 8,
+                'role_id' => 1
+            ],
+            [
+                'permission_id' => 6,
+                'role_id' => 2
+            ],
+            [
+                'permission_id' => 7,
+                'role_id' => 2
+            ],
+            [
+                'permission_id' => 11,
+                'role_id' => 2
+            ],
+            [
+                'permission_id' => 12,
+                'role_id' => 2
+            ],
+            [
+                'permission_id' => 13,
+                'role_id' => 2
+            ],
+            [
+                'permission_id' => 14,
+                'role_id' => 2
+            ],
+            [
+                'permission_id' => 3,
+                'role_id' => 3
+            ],
+            [
+                'permission_id' => 4,
+                'role_id' => 3
+            ],
+            [
+                'permission_id' => 5,
+                'role_id' => 3
+            ],
+            [
+                'permission_id' => 10,
+                'role_id' => 3
+            ],
+        ]);
 
         app('cache')
             ->store(config('permission.cache.store') != 'default' ? config('permission.cache.store') : null)
