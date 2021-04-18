@@ -26,8 +26,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $commission = DB::table('users')->where('id', Auth::user()->id)->first()->accumulated_commission;
-        return view('home', ['commission' => $commission]);
+        return view('home');
     }
 
 

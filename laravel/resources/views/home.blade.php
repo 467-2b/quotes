@@ -96,7 +96,7 @@
                     </div>
                 @hasrole('sales')
                     <!-- User's commissions -->
-                    <h4 class="text-center"><span style="color: #222a80;">Your accumulated commissions:</span> <span style="color: #127522;">${{$commission}}</span></h4>
+                    <h4 class="text-center"><span style="color: #222a80;">Your accumulated commissions:</span> <span style="color: #127522;">${{number_format(Auth::user()->accumulated_commission, 2)}}</span></h4>
                 @endhasrole
                 </div>
             </div>
