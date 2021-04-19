@@ -16,4 +16,20 @@ class Quote extends Model
     {
         return $this->belongsTo(User::class, 'associate_id');
     }
+
+    /**
+     * Get the line items for the quote.
+     */
+    public function line_items()
+    {
+        return $this->hasMany(LineItem::class);
+    }
+
+    /**
+     * Get the line items for the quote.
+     */
+    public function notes()
+    {
+        return $this->hasMany(Note::class);
+    }
 }
