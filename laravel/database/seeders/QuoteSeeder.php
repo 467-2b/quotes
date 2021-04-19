@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
 class QuoteSeeder extends Seeder
 {
@@ -27,7 +26,7 @@ class QuoteSeeder extends Seeder
             $table->timestamps();
             $table->foreign('associate_id')->references('id')->on('users');
         */
-        DB::table('quotes')->insert([
+        $data = [
             [
                 'customer_id' => 6,
                 'associate_id' => 2,
@@ -64,6 +63,7 @@ class QuoteSeeder extends Seeder
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now(),
             ],
-        ]);
+        ];
+        \App\Models\Quote::insert($data);
     }
 }
