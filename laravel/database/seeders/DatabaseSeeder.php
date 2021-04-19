@@ -18,6 +18,8 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             RoleAndPermissionSeeder::class,
             QuoteSeeder::class,
+            LineItemSeeder::class,
+            NoteSeeder::class,
         ]);
     }
 }
