@@ -30,7 +30,7 @@ The application connects to two databases.
 
 > * quote_id references quote(id)
 
-**line_item**(<ins>id</ins>, quote_id†, description, quantity)
+**line_item**(<ins>id</ins>, quote_id†, description, price, quantity)
 
 > * quote_id references quote(id)
 
@@ -99,6 +99,7 @@ The application connects to two databases.
 | id                  | INT           | positive integers  | 1                             | auto increment primary key    |
 | quote_id            | INT           | positive integers  | 5                             | quote(id)                     |
 | description         | VARCHAR(255)  | words              | Turboencabulator maintenance  | description of the line item  |
+| price               | DECIMAL(9,2)  | 0 - 9999999.99     | 1234567.89                    | price of the service          |
 | quantity            | INT           | positive integers  | 3                             | how many of the item          |
 
 #### note
