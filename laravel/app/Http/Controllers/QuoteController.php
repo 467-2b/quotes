@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Quote;
+use App\Models\Customer;
 use Illuminate\Support\Facades\Validator;
 
 class QuoteController extends Controller
@@ -42,7 +43,7 @@ class QuoteController extends Controller
      */
     protected function create(array $data)
     {
-        $customer_name = \App\Models\Customer::find($data['customer_id'])->name;
+        $customer_name = Customer::find($data['customer_id'])->name;
         return Quote::create([
             'associate_id' => $data['associate_id'],
             'customer_id' => $data['customer_id'],
@@ -72,7 +73,7 @@ class QuoteController extends Controller
      */
     public function new()
     {
-        $customers = \App\Models\Customer::all();
+        $customers = Customer::all();
         return view('newquote', compact('customers'));
     }
 
@@ -94,8 +95,8 @@ class QuoteController extends Controller
      */
     public function quote($id)
     {
-        $customers = \App\Models\Customer::all();
-        $quote = \App\Models\Quote::find($id);
+        $customers = Customer::all();
+        $quote = Quote::find($id);
         $line_items = $quote->line_items;
         $notes = $quote->notes->where('secret', false);
         $secret_notes = $quote->notes->where('secret', true);
