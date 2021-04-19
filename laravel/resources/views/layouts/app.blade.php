@@ -33,7 +33,17 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-
+                        @auth
+                            <li class="nav-item"><a class="nav-link{{ request()->routeIs('home') ? ' active' : '' }}" href="{{ route('home') }}">Home</a></li>
+                            @can('edit user')
+                            <li class="nav-item"><a class="nav-link{{ request()->routeIs('users') ? ' active' : '' }}" href="{{ route('users') }}">Users</a></li>
+                            @endcan
+                            <li class="nav-item"><a class="nav-link{{ request()->routeIs('quotes') ? ' active' : '' }}" href="{{ route('quotes') }}">Quotes</a></li>
+                            @can('view processed order')
+                            <li class="nav-item"><a class="nav-link{{ request()->routeIs('quotes') ? ' active' : '' }}" href="{{ route('orders') }}">Orders</a></li>
+                            @endcan
+                            <li class="nav-item"><a class="nav-link{{ request()->routeIs('customers') ? ' active' : '' }}" href="{{ route('customers') }}">Customers</a></li>
+                        @endauth
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -53,12 +63,6 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                @if (Route::has('users'))
-                                    <a class="dropdown-item" href="{{ route('users') }}">{{ __('Users') }}</a>
-                                @endif
-                                @if (Route::has('register'))
-                                    <a class="dropdown-item" href="{{ route('register') }}">{{ __('New User') }}</a>
-                                @endif
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

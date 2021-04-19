@@ -58,6 +58,7 @@ class RegisterController extends Controller
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'username' => ['required', 'string', 'alpha_dash', 'max:255', 'unique:users'],
             'address' => ['required', 'string', 'max:255', 'unique:users'],
+            'role' => ['required', 'string', 'exists:roles,name']
         ]);
     }
 
@@ -76,7 +77,7 @@ class RegisterController extends Controller
             'address' => $data['address'],
             'password' => Hash::make($data['password']),
             // 'accumulated_comission' => 0.00,
-        ]);
+        ])->assignRole($data['role']);
     }
 
    /**

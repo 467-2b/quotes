@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        <title>Quote System</title>
+        <title>{{ config('app.name', 'Quotes System') }}</title>
 
         <link rel="icon" href="https://image.flaticon.com/icons/png/512/2131/2131042.png">
 
@@ -36,7 +36,7 @@
 
                         <div class="container">
                             <div class="carousel-caption">
-                                <h1>Quotes System</h1>
+                                <h1>{{ config('app.name', 'Quotes System') }}</h1>
                                 <p>Create, review, and convert quotes for plant repair.</p>
                                 <p><br/></p>
                             </div>
@@ -47,7 +47,7 @@
 
                         <div class="container">
                             <div class="carousel-caption" style="color:black;">
-                                <h1>Quotes System</h1>
+                                <h1>{{ config('app.name', 'Quotes System') }}</h1>
                                 <p>Create, review, and convert quotes for plant repair.</p>
                                 <p><br/></p>
                             </div>

@@ -25,10 +25,10 @@ Route::get('/orders', [App\Http\Controllers\HomeController::class, 'orders'])->n
 Route::get('/quotes', [App\Http\Controllers\QuoteController::class, 'quotes'])->name('quotes');
 Route::get('/newquote', [App\Http\Controllers\HomeController::class, 'newquote'])->name('newquote');
 Route::get('/users', function () {
-    $users = DB::table('users')->get();
-    return view('users', ['users' => $users]);
+    $users = \App\Models\User::all();
+    return view('users', compact('users'));
 })->name('users');
 Route::get('/user/{username}', function ($username) {
-    $user = DB::table('users')->where('username', $username)->first();
-    return view('user', ['user' => $user]);
+    $user = \App\Models\User::where('username', $username)->first();
+    return view('user', compact('user'));
 })->name('user');
