@@ -15,10 +15,10 @@ class CreateLineItemsTable extends Migration
     {
         Schema::create('line_items', function (Blueprint $table) {
             $table->id();
-            $table->integer('quote_id');
+            $table->unsignedBigInteger('quote_id');
             $table->string('description');
             $table->decimal('price', 9, 2);
-            $table->integer('quantity');
+            $table->unsignedInteger('quantity');
             $table->timestamps();
             $table->foreign('quote_id')->references('id')->on('quotes');
         });
