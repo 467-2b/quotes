@@ -44,4 +44,20 @@ class Quote extends Model
     {
         return $this->hasMany(Note::class);
     }
+
+    /**
+     * Get the phone associated with the user.
+     */
+    public function order()
+    {
+        return $this->hasOne(Order::class);
+    }
+
+    /**
+     * Get the customer associated with the quote
+     */
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class);
+    }
 }

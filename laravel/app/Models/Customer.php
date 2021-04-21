@@ -11,4 +11,13 @@ class Customer extends Model
     protected $connection = 'legacydb';
     protected $table = 'customers';
     public $timestamps = false;
+
+    /**
+     * Get the quotes from the customer
+     */
+    public function quotes()
+    {
+        return $this->hasMany(Quote::class);
+    }
+
 }
