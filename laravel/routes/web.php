@@ -28,7 +28,7 @@ Route::get('/users', function () {
     $users = \App\Models\User::all();
     return view('users', compact('users'));
 })->name('users');
-Route::get('/user/{username}', function ($username) {
-    $user = \App\Models\User::where('username', $username)->first();
+Route::get('/user/{id}', function ($id) {
+    $user = \App\Models\User::find($id);
     return view('user', compact('user'));
 })->name('user');
