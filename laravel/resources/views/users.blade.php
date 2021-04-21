@@ -29,7 +29,7 @@
                                 <tbody>
                                 @foreach($users as $user)
                                     <tr>
-                                        <td><a href="/user/{{$user->username}}">{{$user->username}}</a></td>
+                                        <td><a href="/user/{{$user->id}}">{{$user->username}}</a></td>
                                         <td>{{$user->getRoleNames()->implode(', ')}}</td>
                                         <td>{{$user->name}}</td>
                                         <td>{{$user->email}}</td>

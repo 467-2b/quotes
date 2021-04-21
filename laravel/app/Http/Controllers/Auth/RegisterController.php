@@ -102,4 +102,28 @@ class RegisterController extends Controller
                     ? new JsonResponse([], 201)
                     : redirect($this->redirectPath());
     }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        $this->validator($request->all())->validate();
+        $data = $request->all();
+        $user = User::find($id);
+        $user->update([
+            'name' => $data['name'],
+            'username' => $data['username'],
+            'email' => $data['email'],
+            'address' => $data['address'],
+            'password' => Hash::make($data['password']),
+        ]);
+        $user->syncRoles([$data['role']]);
+
+        return view('user', compact('user'));
+    }
 }

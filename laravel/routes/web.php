@@ -30,7 +30,8 @@ Route::get('/users', function () {
     $users = \App\Models\User::all();
     return view('users', compact('users'));
 })->name('users');
-Route::get('/user/{username}', function ($username) {
-    $user = \App\Models\User::find($username);
+Route::get('/user/{id}', function ($id) {
+    $user = \App\Models\User::find($id);
     return view('user', compact('user'));
 })->name('user');
+Route::post('/user/{id}', [App\Http\Controllers\Auth\RegisterController::class, 'update'])->name('user.update');
