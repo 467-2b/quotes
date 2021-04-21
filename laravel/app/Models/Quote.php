@@ -10,6 +10,18 @@ class Quote extends Model
     use HasFactory;
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'associate_id',
+        'customer_id',
+        'customer_name',
+        'customer_email',
+    ];
+
+    /**
      * Get the associate that owns the quote.
      */
     public function associate()
