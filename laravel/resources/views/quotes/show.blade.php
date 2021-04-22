@@ -6,33 +6,17 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                @canany(['edit own quote', 'edit finalized quote'])
-                {{ __('Edit quote') }}
-                @elsecanany(['view finalized quote', 'view any quote'])
-                {{ __('View quote') }}
-                @endcan
-                : {{$quote->id}}
+                {{ __('View quote') }} : {{ $quote->id }}
                 </div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('newquote') }}">
-                        @csrf
                         <input type="hidden" name="associate_id" value="{{ Auth::id() }}">
 
                         <div class="form-group row">
-                            <label for="customer_id" class="col-md-4 col-form-label text-md-right">{{ __('Customer') }}</label>
+                            <label for="customer_name" class="col-md-4 col-form-label text-md-right">{{ __('Customer') }}</label>
 
                             <div class="col-md-6">
-                                <select disabled id="customer_id" class="form-control @error('customer_id') is-invalid @enderror" name="customer_id" required autofocus>
-                                @foreach($customers as $customer)
-                                    <option @if($quote->customer_id == $customer->id) selected @endif value="{{$customer->id}}">{{$customer->name}}</option>
-                                @endforeach
-                                </select>
-                                @error('customer_id')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                                <span class="h3" id="customer_name">{{ $quote->customer_name }}</span>
                             </div>
                         </div>
 
@@ -40,24 +24,25 @@
                             <label for="customer_email" class="col-md-4 col-form-label text-md-right">{{ __('Contact Email') }}</label>
 
                             <div class="col-md-6">
-                                <input id="customer_email" type="text" class="form-control @error('customer_email') is-invalid @enderror" name="customer_email" value="{{ $quote->customer_email }}" required>
-
-                                @error('customer_email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                                <span class="h3" id="customer_email">{{ $quote->customer_email }}</span>
                             </div>
                         </div>
 
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Update quote') }}
-                                </button>
+                        <div class="form-group row">
+                            <label for="customer_contact" class="col-md-4 col-form-label text-md-right">{{ __('Contact (Other)') }}</label>
+
+                            <div class="col-md-6">
+                                <span class="h3" id="customer_contact">{{ $customer->contact }}</span>
                             </div>
                         </div>
-                    </form>
+
+                        <div class="form-group row">
+                            <label for="customer_address" class="col-md-4 col-form-label text-md-right">{{ __('Address') }}</label>
+
+                            <div class="col-md-6">
+                                <span class="h3" id="customer_address">{{ $customer->street }}, {{ $customer->city }}</span>
+                            </div>
+                        </div>
                 </div>
             </div>
             
@@ -70,20 +55,41 @@
                             <th>Description</th>
                             <th class="text-right">Price</th>
                             <th class="text-right">Quantity</th>
+                            <th class="text-right">Item Subtotal</th>
                         </tr>
                         </thead>
                         <tbody>
                         @foreach($line_items as $line_item)
                             <tr>
                                 <td>{{$line_item->description}}</td>
-                                <td class="text-right">{{$line_item->price}}</td>
-                                <td class="text-right">{{$line_item->quantity}}</td>
+                                <td class="text-right">{{ $line_item->price }}</td>
+                                <td class="text-right">{{ $line_item->quantity }}</td>
+                                <td class="text-right">${{ number_format($line_item->subtotal, 2) }}</td>
                             </tr>
                         @endforeach
                             <tr>
-                                <td><input class="form-control" type="text" name="description" placeholder="Description"></td>
-                                <td><input class="form-control" type="number" name="price" placeholder="Price"></td>
-                                <td><input class="form-control" type="number" name="quantity" placeholder="Quantity"></td>
+                                <td><strong>Items total<strong></td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td class="text-right">${{ number_format($quote->total_amount, 2) }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Discount percent<strong></td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td class="text-right">{{ $quote->discount_percent * 100 }}%</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Discount amount<strong></td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td class="text-right">${{ number_format($quote->discount_amount, 2) }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Final total after discount<strong></td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td class="text-right">${{ number_format($quote->final_total_amount_after_discounts, 2) }}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -97,7 +103,6 @@
                     <label for="note_{{ $note->id }}">{{ $note->created_at }}</label>
                     <textarea class="form-control mb-4" id="note_{{ $note->id }}" name="notes" style="width: 100%; max-width: 100%;">{{ $note->text }}</textarea>
                     @endforeach
-                    <textarea class="form-control mb-4" id="note_new" name="notes" style="width: 100%; max-width: 100%;" placeholder="Add notes"></textarea>
                 </div>
             </div>
             
@@ -108,10 +113,8 @@
                     <label for="note_{{ $note->id }}">{{ $note->created_at }}</label>
                     <textarea class="form-control mb-4" id="note_{{ $note->id }}" name="notes" style="width: 100%; max-width: 100%;">{{ $note->text }}</textarea>
                     @endforeach
-                    <textarea class="form-control mb-4" id="note_new" name="notes" style="width: 100%; max-width: 100%;" placeholder="Add secret notes"></textarea>
                 </div>
             </div>
-
         </div>
     </div>
 </div>

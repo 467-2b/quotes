@@ -38,9 +38,9 @@
                             @can('edit user')
                             <li class="nav-item"><a class="nav-link{{ request()->routeIs('users') ? ' active' : '' }}" href="{{ route('users') }}">Users</a></li>
                             @endcan
-                            <li class="nav-item"><a class="nav-link{{ request()->routeIs('quotes') ? ' active' : '' }}" href="{{ route('quotes') }}">Quotes</a></li>
+                            <li class="nav-item"><a class="nav-link{{ request()->routeIs('quotes.index') ? ' active' : '' }}" href="{{ route('quotes.index') }}">Quotes</a></li>
                             @can('view processed order')
-                            <li class="nav-item"><a class="nav-link{{ request()->routeIs('quotes') ? ' active' : '' }}" href="{{ route('orders') }}">Orders</a></li>
+                            <li class="nav-item"><a class="nav-link{{ request()->routeIs('orders') ? ' active' : '' }}" href="{{ route('orders') }}">Orders</a></li>
                             @endcan
                             <li class="nav-item"><a class="nav-link{{ request()->routeIs('customers') ? ' active' : '' }}" href="{{ route('customers') }}">Customers</a></li>
                         @endauth

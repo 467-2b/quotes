@@ -17,4 +17,12 @@ class LineItem extends Model
     {
         return $this->belongsTo(Quote::class);
     }
+
+    /**
+     * Get the total amount for this quote.
+     */
+    public function getSubtotalAttribute()
+    {
+        return $this->price * $this->quantity;
+    }
 }
