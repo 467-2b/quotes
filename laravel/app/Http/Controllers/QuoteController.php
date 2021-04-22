@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Quote;
 use App\Models\Customer;
+use App\Models\Quote;
+use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
@@ -143,23 +144,25 @@ class QuoteController extends Controller
             'order' => $purchase_order_id,
             'associate' => $quote->associate_id,
             'custid' => $quote->customer_id,
-            'amount' => 0.0, //$quote->final_total_amount_after_discounts,
+            'amount' => $quote->final_total_amount_after_discounts,
         ];
         $url = 'http://blitz.cs.niu.edu/PurchaseOrder/';
         $response = Http::post($url, $request);
-        dd($response);
         $data = [
             'quote_id' => $quote_id,
             'purchase_order_id' => $purchase_order_id,
             'process_day' => \Carbon\Carbon::createFromFormat('Y/n/j', $response['processDay'])->format('Y-m-d'),
-            'commission' => intval((string) $response['commission']) / 100,
+            'commission_percent' => intval((string) $response['commission']) / 100,
         ];
         $order = \App\Models\Order::create([
             'quote_id' => $data['quote_id'],
             'purchase_order_id' => $data['purchase_order_id'],
             'process_day' => $data['process_day'],
-            'commission' => $data['commission'],
+            'commission_percent' => $data['commission_percent'],
         ]);
+        $earned_commission = round($request['amount'] * $data['commission_percent'], 2);
+        $associate = User::find($quote->associate_id);
+        $associate->increment('accumulated_commission', $earned_commission);
         return redirect(route('orders.show', $order->id)); 
     }
 }
