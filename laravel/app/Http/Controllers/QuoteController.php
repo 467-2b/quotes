@@ -83,12 +83,12 @@ class QuoteController extends Controller
      */
     public function show($id)
     {
-        $customers = Customer::all();
-        $quote = Quote::find($id);
+        $quote = Quote::with('customer')->find($id);
+        $customer = $quote->customer;
         $line_items = $quote->line_items;
         $notes = $quote->notes->where('secret', false);
         $secret_notes = $quote->notes->where('secret', true);
-        return view('quotes.view', compact('customers', 'quote', 'line_items', 'notes', 'secret_notes'));
+        return view('quotes.show', compact('quote', 'customer', 'line_items', 'notes', 'secret_notes'));
     }
 
     /**

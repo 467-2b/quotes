@@ -6,24 +6,17 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                @canany(['edit own quote', 'edit finalized quote'])
-                {{ __('Edit quote') }}
-                @elsecanany(['view finalized quote', 'view any quote'])
-                {{ __('View quote') }}
-                @endcan
-                : {{$quote->id}}
+                {{ __('View quote') }} : {{ $quote->id }}
                 </div>
 
                 <div class="card-body">
                         <input type="hidden" name="associate_id" value="{{ Auth::id() }}">
 
                         <div class="form-group row">
-                            <label for="customer_id" class="col-md-4 col-form-label text-md-right">{{ __('Customer') }}</label>
+                            <label for="customer_name" class="col-md-4 col-form-label text-md-right">{{ __('Customer') }}</label>
 
                             <div class="col-md-6">
-                                <select disabled id="customer_id" class="form-control" name="customer_id">
-                                    <option selected value="{{ $quote->customer_id }}">{{ $quote->customer_name }}</option>
-                                </select>
+                                <span id="customer_name">{{ $quote->customer_name }}</span>
                             </div>
                         </div>
 
@@ -31,7 +24,23 @@
                             <label for="customer_email" class="col-md-4 col-form-label text-md-right">{{ __('Contact Email') }}</label>
 
                             <div class="col-md-6">
-                                <input disabled id="customer_email" type="text" class="form-control" name="customer_email" value="{{ $quote->customer_email }}">
+                                <span id="customer_email">{{ $quote->customer_email }}</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="customer_contact" class="col-md-4 col-form-label text-md-right">{{ __('Contact (Other)') }}</label>
+
+                            <div class="col-md-6">
+                                <span id="customer_contact">{{ $customer->contact }}</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="customer_address" class="col-md-4 col-form-label text-md-right">{{ __('Address') }}</label>
+
+                            <div class="col-md-6">
+                                <span id="customer_address">{{ $customer->street }}, {{ $customer->city }}</span>
                             </div>
                         </div>
                 </div>
