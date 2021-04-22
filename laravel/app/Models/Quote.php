@@ -46,13 +46,29 @@ class Quote extends Model
     }
 
     /**
-     * Get the line items for the quote.
+     * Get the notes for the quote.
      */
     public function notes()
     {
         return $this->hasMany(Note::class);
     }
 
+    /**
+     * Get the order associated with the quote.
+     */
+    public function order()
+    {
+        return $this->hasOne(Order::class);
+    }
+
+    /**
+     * Get the customer associated with the quote
+     */
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class);
+    }
+  
     /**
      * Get the total amount for this quote.
      */

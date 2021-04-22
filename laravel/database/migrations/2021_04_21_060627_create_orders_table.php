@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateNotesTable extends Migration
+class CreateOrdersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateNotesTable extends Migration
      */
     public function up()
     {
-        Schema::create('notes', function (Blueprint $table) {
+        Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('quote_id');
-            $table->boolean('secret');
-            $table->text('text');
+            $table->string('purchase_order_id');
+            $table->date('process_day');
+            $table->decimal('commission_percent', 3, 2);
             $table->timestamps();
             $table->foreign('quote_id')->references('id')->on('quotes');
         });
@@ -30,6 +31,6 @@ class CreateNotesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('notes');
+        Schema::dropIfExists('orders');
     }
 }

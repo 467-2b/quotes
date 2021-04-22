@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Quote;
 use App\Models\Customer;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Str;
 
 class QuoteController extends Controller
 {
@@ -125,5 +127,39 @@ class QuoteController extends Controller
             'customer_name' => \App\Models\Customer::find($data['customer_id'])->name
         ]);
         return $this->edit($id);
+    }
+
+    /**
+     * Convert a quote into an order
+     * 
+     * 
+     */
+    
+    protected function convert(int $quote_id)
+    {
+        $quote = Quote::find($quote_id);
+        $purchase_order_id = (string) Str::uuid();
+        $request = [
+            'order' => $purchase_order_id,
+            'associate' => $quote->associate_id,
+            'custid' => $quote->customer_id,
+            'amount' => 0.0, //$quote->final_total_amount_after_discounts,
+        ];
+        $url = 'http://blitz.cs.niu.edu/PurchaseOrder/';
+        $response = Http::post($url, $request);
+        dd($response);
+        $data = [
+            'quote_id' => $quote_id,
+            'purchase_order_id' => $purchase_order_id,
+            'process_day' => \Carbon\Carbon::createFromFormat('Y/n/j', $response['processDay'])->format('Y-m-d'),
+            'commission' => intval((string) $response['commission']) / 100,
+        ];
+        $order = \App\Models\Order::create([
+            'quote_id' => $data['quote_id'],
+            'purchase_order_id' => $data['purchase_order_id'],
+            'process_day' => $data['process_day'],
+            'commission' => $data['commission'],
+        ]);
+        return redirect(route('orders.show', $order->id)); 
     }
 }

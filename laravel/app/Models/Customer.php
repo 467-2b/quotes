@@ -11,8 +11,9 @@ class Customer extends Model
     protected $connection = 'legacydb';
     protected $table = 'customers';
     public $timestamps = false;
+
     /**
-     * Get the line items for the quote.
+     * Get the quotes from the customer
      */
     public function quotes()
     {
