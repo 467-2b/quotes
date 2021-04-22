@@ -93,7 +93,7 @@
                                 </td>
                             </tr>
                         @endforeach
-                            <tr><<form class="form-horizontal" role="form">>
+                            <tr><form class="form-horizontal" role="form">
                                 <td><input class="form-control" type="text" name="description" placeholder="Description"></td>
                                 <td><input class="form-control" type="number" name="price" placeholder="Price"></td>
                                 <td><input class="form-control" type="number" name="quantity" placeholder="Quantity"></td>
