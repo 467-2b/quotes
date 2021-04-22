@@ -36,13 +36,20 @@ open the .env file, and find the MySQL database section and make these changes:
 DB_CONNECTION=sqlite
 #DB_DATABASE=../database/database.sqlite
 DB_FOREIGN_KEYS=true
+
+# Add the credentials to the legacy DB from Blackboard
+LEGACY_DB_CONNECTION=mysql
+LEGACY_DB_HOST=127.0.0.1
+LEGACY_DB_PORT=3306
+LEGACY_DB_DATABASE=
+LEGACY_DB_USERNAME=
+LEGACY_DB_PASSWORD=
 ```
 
 Then run these commands: 
 ```sh
 touch database/database.sqlite
-php artisan migrate
-php artisan db:seed
+php artisan migrate:fresh --seed
 ```
 
 **Updating project files and database**
