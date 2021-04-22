@@ -318,6 +318,9 @@ class QuoteController extends Controller
         ];
         $url = 'http://blitz.cs.niu.edu/PurchaseOrder/';
         $response = Http::post($url, $submission);
+        if(isset($response['errors'])) {
+            dd($response);
+        }
         $data = [
             'quote_id' => $quote_id,
             'purchase_order_id' => $purchase_order_id,
