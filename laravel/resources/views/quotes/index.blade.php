@@ -8,13 +8,16 @@
             <div class="card">
                 <div class="card-header text-center"><h4>{{ __('Quotes') }}</h4></div>
                 <div class="card-body">
+                @role('admin')
                 <div>
                 <select id="statusFilter" class = "form-control" style="width:150px;">
                     <option value="">Any status</option>
                     <option value="unfinalized">unfinalized</option>
                     <option value="finalized">finalized</option>
                     <option value="sanctioned">sanctioned</option>
+                    <option value="processed">processed</option>
                 </select>
+                @endrole
                 </div>
                     <table class="table table-striped " id="quotesTable">
                         <thead class="thead-dark">
@@ -53,6 +56,7 @@
 </div>
 
 @endsection
+@role('admin')
 @push('script')
     <script src="//code.jquery.com/jquery-1.12.3.js" ></script>
     <script src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js" defer></script>
@@ -89,4 +93,5 @@
       table.draw();
     });
     </script>
-@endpush 
+@endpush
+@endrole
