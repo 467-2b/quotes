@@ -168,9 +168,9 @@
                             </button>
                         @endif
                         @if($quote->status == 'finalized' && Auth::user()->can('sanction quote'))
-                            <button type="submit" name="action" value="sanction" class="btn btn-success btn-lg">
+                            <a class="btn btn-success btn-lg" href="{{ route('quotes.email-preview', $quote->id) }}">
                                 {{ __('Sanction quote') }}
-                            </button>
+                            </a>
                         @endif
                         </div>
                     </div>
