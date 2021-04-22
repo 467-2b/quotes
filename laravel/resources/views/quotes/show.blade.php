@@ -16,7 +16,7 @@
                             <label for="customer_name" class="col-md-4 col-form-label text-md-right">{{ __('Customer') }}</label>
 
                             <div class="col-md-6">
-                                <span id="customer_name">{{ $quote->customer_name }}</span>
+                                <span class="h3" id="customer_name">{{ $quote->customer_name }}</span>
                             </div>
                         </div>
 
@@ -24,7 +24,7 @@
                             <label for="customer_email" class="col-md-4 col-form-label text-md-right">{{ __('Contact Email') }}</label>
 
                             <div class="col-md-6">
-                                <span id="customer_email">{{ $quote->customer_email }}</span>
+                                <span class="h3" id="customer_email">{{ $quote->customer_email }}</span>
                             </div>
                         </div>
 
@@ -32,7 +32,7 @@
                             <label for="customer_contact" class="col-md-4 col-form-label text-md-right">{{ __('Contact (Other)') }}</label>
 
                             <div class="col-md-6">
-                                <span id="customer_contact">{{ $customer->contact }}</span>
+                                <span class="h3" id="customer_contact">{{ $customer->contact }}</span>
                             </div>
                         </div>
 
@@ -40,7 +40,7 @@
                             <label for="customer_address" class="col-md-4 col-form-label text-md-right">{{ __('Address') }}</label>
 
                             <div class="col-md-6">
-                                <span id="customer_address">{{ $customer->street }}, {{ $customer->city }}</span>
+                                <span class="h3" id="customer_address">{{ $customer->street }}, {{ $customer->city }}</span>
                             </div>
                         </div>
                 </div>
@@ -55,7 +55,7 @@
                             <th>Description</th>
                             <th class="text-right">Price</th>
                             <th class="text-right">Quantity</th>
-                            <th class="text-right">Subtotal</th>
+                            <th class="text-right">Item Subtotal</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -68,10 +68,28 @@
                             </tr>
                         @endforeach
                             <tr>
-                                <td><strong>Total<strong></td>
+                                <td><strong>Items total<strong></td>
                                 <td>&nbsp;</td>
                                 <td>&nbsp;</td>
                                 <td class="text-right">${{ number_format($quote->total_amount, 2) }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Discount percent<strong></td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td class="text-right">{{ $quote->discount_percent * 100 }}%</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Discount amount<strong></td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td class="text-right">${{ number_format($quote->discount_amount, 2) }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Final total after discount<strong></td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td class="text-right">${{ number_format($quote->final_total_amount_after_discounts, 2) }}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -97,7 +115,6 @@
                     @endforeach
                 </div>
             </div>
-
         </div>
     </div>
 </div>

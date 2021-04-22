@@ -60,4 +60,12 @@ class Quote extends Model
     {
         return $this->line_items->sum('subtotal');
     }
+
+    /**
+     * Get the total amount for this quote.
+     */
+    public function getFinalTotalAmountAfterDiscountsAttribute()
+    {
+        return $this->total_amount * (1 - $this->discount_percent) - $this->discount_amount;
+    }
 }
