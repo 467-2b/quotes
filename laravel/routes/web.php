@@ -35,3 +35,5 @@ Route::get('/user/{id}', function ($id) {
     return view('user', compact('user'));
 })->name('user');
 Route::post('/user/{id}', [App\Http\Controllers\Auth\RegisterController::class, 'update'])->name('user.update');
+Route::post('/quotes/{id}/convert', [App\Http\Controllers\Auth\QuoteController::class, 'convert'])->name('quotes.convert');
+Route::get('/orders/{id}', [App\Http\Controllers\OrderController::class, 'show'])->name('orders.show');
