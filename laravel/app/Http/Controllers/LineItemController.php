@@ -45,4 +45,21 @@ class LineItemController extends Controller
         LineItem::find ( $request->id )->delete ();
         return response ()->json ();
     }
+
+    public function create(Request $request) {
+        $validator = $this->validator($request->all());
+        if ($validator->fails ())
+            return Response::json ( array (
+                    'errors' => $validator->getMessageBag ()->toArray ()
+            ) );
+            else {
+                $line_item = new LineItem();
+                $line_item->quote_id = ($request->quote_id);
+                $line_item->description = ($request->description);
+                $line_item->price = ($request->price);
+                $line_item->quantity = ($request->quantity);
+                $line_item->save ();
+                return response ()->json ( $line_item );
+            }
+    }
 }

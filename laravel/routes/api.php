@@ -22,3 +22,5 @@ Route::post ( '/lineitems/update', [App\Http\Controllers\LineItemController::cla
 
 Route::post ( '/lineitems/destroy', [App\Http\Controllers\LineItemController::class, 'destroy'])->name('api.lineitems.destroy');
 
+Route::post ( '/lineitems/create', [App\Http\Controllers\LineItemController::class, 'create'])->name('api.lineitems.create');
+

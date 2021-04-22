@@ -93,12 +93,15 @@
                                 </td>
                             </tr>
                         @endforeach
-                            <tr>
+                            <tr><<form class="form-horizontal" role="form">>
                                 <td><input class="form-control" type="text" name="description" placeholder="Description"></td>
                                 <td><input class="form-control" type="number" name="price" placeholder="Price"></td>
                                 <td><input class="form-control" type="number" name="quantity" placeholder="Quantity"></td>
-                                <td><input class="form-control" type="number" name="test" placeholder="test"></td>
-                            </tr>
+                                <!--td><input class="form-control" type="number" name="test" placeholder="test"></td-->
+                                <td><button class="btn btn-primary" type="submit" id="create">
+                                         <span class="glyphicon glyphicon-plus">ADD</span>
+                                    </button></td>
+                            </form></tr>
                         </tbody>
                     </table>
                 </div>
@@ -201,7 +204,7 @@
                 $('.actionBtn').removeClass('delete');
                 $('.actionBtn').addClass('edit');
                 $('.modal-title').text('Edit');
-                //$('.deleteContent').hide();
+                $('.deleteContent').hide();
                 $('.form-horizontal').show();
                 var stuff = $(this).data('info').split(',');
                 fillmodalData(stuff)
@@ -210,7 +213,7 @@
 
     function fillmodalData(details){
         var path = window.location.pathname.split('/');
-        //$('#id').val(path[2]);
+        //$('#qid').val(path[2]);
         $('#id').val(details[0]);
         $('#description').val(details[1]);
         $('#price').val(details[2]);
@@ -256,45 +259,42 @@
                              + data.id+","+data.description+","+data.price+","+data.quantity+
                              "' ><span class='glyphicon glyphicon-trash'></span> Delete</button></td></tr>"
                             );
-                        //$('#itemsTable').DataTable().clear();
-                        //$('#itemsTable').DataTable().ajax.url(window.location.pathname).load();
                     }
                 }
             });
     });
 
-    /*$("#add").click(function() {
+    $("#create").click(function() {
+        var path = window.location.pathname.split('/');
         $.ajax({
             type: 'post',
-            url: '/addItem',
+            url: '/api/lineitems/create',
             data: {
                 '_token': $('input[name=_token]').val(),
-                'name': $('input[name=name]').val()
+                'quote_id':$('#quote_id').val(path[2]),
+                'description': $('input[name=description]').val(),
+                'price': $('input[name=price]').val(),
+                'quantity': $('input[name=quantity]').val(),
             },
-            success: function(data) {
-                if ((data.errors)){
-                $('.error').removeClass('hidden');
-                    $('.error').text(data.errors.name);
-                }
-                else {
-                    $('.error').addClass('hidden');
-                    $('#itemsTable').append("<tr class='item" + line_items.id + "'><td>" + line_items.id + 
-                    "</td><td>" + line_items.desc + "</td><td>" + line_items.price + "</td><td>" + 
-                    line_items.quant + "</td><td><button class='edit-modal btn btn-info' data-id='" + 
-                    line_items.id + "' data-desc='" + line_items.desc + "' data-price='" + line_items.price 
-                    + "' data-quant='" + line_items.quant + 
-                    "'><span class='glyphicon glyphicon-edit'></span> Edit</button> <button class='delete-modal btn btn-danger' data-id='" 
-                    + line_items.id + "' data-desc='" + line_items.desc + "'' data-price='" + line_items.price 
-                    + "'' data-quant='" + line_items.quant + "'><span class='glyphicon glyphicon-trash'></span> Delete</button></td></tr>"
-                    );
-                }
+            success: function(data) 
+            {
+                $('.error').addClass('hidden');
+                $('#itemsTable').append("<tr id='item" + data.id + "'><td>" + data.description +
+                "</td><td class='text-right'>" + data.price + "</td><td class='text-right'>" + data.quantity +
+                "</td><td><button class='edit-modal btn btn-info' data-info='" + 
+                data.id+","+data.description+","+data.price+","+data.quantity+
+                "'><span class='glyphicon glyphicon-edit'></span> Edit</button> <button class='delete-modal btn btn-danger' data-info='"
+                + data.id+","+data.description+","+data.price+","+data.quantity+
+                "' ><span class='glyphicon glyphicon-trash'></span> Delete</button></td></tr>"
+                );
             },
-
         });
-        $('#desc').val('');
+        $('#quote_id').val('');
+        $('#description').val('');
         $('#price').val('');
-        $('#quant').val('');
-    });*/
+        $('#quantity').val('');
+    });
+
     $(document).on('click', '.delete-modal', function() {
         $('#footer_action_button').text(" Delete");
         $('#footer_action_button').removeClass('glyphicon-check');
