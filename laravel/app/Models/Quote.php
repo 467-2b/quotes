@@ -44,4 +44,12 @@ class Quote extends Model
     {
         return $this->hasMany(Note::class);
     }
+
+    /**
+     * Get the total amount for this quote.
+     */
+    public function getTotalAmountAttribute()
+    {
+        return $this->line_items->sum('subtotal');
+    }
 }
