@@ -15,15 +15,24 @@
                 </div>
 
                 <div class="card-body">
+                    <form method="POST">
+                        @csrf
                         <input type="hidden" name="associate_id" value="{{ Auth::id() }}">
 
                         <div class="form-group row">
                             <label for="customer_id" class="col-md-4 col-form-label text-md-right">{{ __('Customer') }}</label>
 
                             <div class="col-md-6">
-                                <select disabled id="customer_id" class="form-control" name="customer_id">
-                                    <option selected value="{{ $quote->customer_id }}">{{ $quote->customer_name }}</option>
+                                <select id="customer_id" class="form-control @error('customer_id') is-invalid @enderror" name="customer_id" required autofocus>
+                                @foreach($customers as $customer)
+                                    <option @if($quote->customer_id == $customer->id) selected @endif value="{{$customer->id}}">{{$customer->name}}</option>
+                                @endforeach
                                 </select>
+                                @error('customer_id')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
 
@@ -31,9 +40,24 @@
                             <label for="customer_email" class="col-md-4 col-form-label text-md-right">{{ __('Contact Email') }}</label>
 
                             <div class="col-md-6">
-                                <input disabled id="customer_email" type="text" class="form-control" name="customer_email" value="{{ $quote->customer_email }}">
+                                <input id="customer_email" type="text" class="form-control @error('customer_email') is-invalid @enderror" name="customer_email" value="{{ $quote->customer_email }}" required>
+
+                                @error('customer_email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
+
+                        <div class="form-group row mb-0">
+                            <div class="col-md-6 offset-md-4">
+                                <button type="submit" class="btn btn-primary">
+                                    {{ __('Update quote') }}
+                                </button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
             
@@ -46,23 +70,20 @@
                             <th>Description</th>
                             <th class="text-right">Price</th>
                             <th class="text-right">Quantity</th>
-                            <th class="text-right">Subtotal</th>
                         </tr>
                         </thead>
                         <tbody>
                         @foreach($line_items as $line_item)
                             <tr>
                                 <td>{{$line_item->description}}</td>
-                                <td class="text-right">{{ $line_item->price }}</td>
-                                <td class="text-right">{{ $line_item->quantity }}</td>
-                                <td class="text-right">${{ number_format($line_item->subtotal, 2) }}</td>
+                                <td class="text-right">{{$line_item->price}}</td>
+                                <td class="text-right">{{$line_item->quantity}}</td>
                             </tr>
                         @endforeach
                             <tr>
-                                <td><strong>Total<strong></td>
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
-                                <td class="text-right">${{ number_format($quote->total_amount, 2) }}</td>
+                                <td><input class="form-control" type="text" name="description" placeholder="Description"></td>
+                                <td><input class="form-control" type="number" name="price" placeholder="Price"></td>
+                                <td><input class="form-control" type="number" name="quantity" placeholder="Quantity"></td>
                             </tr>
                         </tbody>
                     </table>
@@ -76,6 +97,7 @@
                     <label for="note_{{ $note->id }}">{{ $note->created_at }}</label>
                     <textarea class="form-control mb-4" id="note_{{ $note->id }}" name="notes" style="width: 100%; max-width: 100%;">{{ $note->text }}</textarea>
                     @endforeach
+                    <textarea class="form-control mb-4" id="note_new" name="notes" style="width: 100%; max-width: 100%;" placeholder="Add notes"></textarea>
                 </div>
             </div>
             
@@ -86,6 +108,7 @@
                     <label for="note_{{ $note->id }}">{{ $note->created_at }}</label>
                     <textarea class="form-control mb-4" id="note_{{ $note->id }}" name="notes" style="width: 100%; max-width: 100%;">{{ $note->text }}</textarea>
                     @endforeach
+                    <textarea class="form-control mb-4" id="note_new" name="notes" style="width: 100%; max-width: 100%;" placeholder="Add secret notes"></textarea>
                 </div>
             </div>
 
