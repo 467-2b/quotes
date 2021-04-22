@@ -15,7 +15,7 @@
                                 @can('edit user')
                                 <li class="nav-item"><a class="nav-link" href="{{ route('users') }}">Users</a></li>
                                 @endcan
-                                <li class="nav-item"><a class="nav-link" href="{{ route('quotes') }}">Quotes</a></li>
+                                <li class="nav-item"><a class="nav-link" href="{{ route('quotes.index') }}">Quotes</a></li>
                                 @can('view processed order')
                                 <li class="nav-item"><a class="nav-link" href="{{ route('orders') }}">Orders</a></li>
                                 @endcan
