@@ -30,6 +30,14 @@ class Quote extends Model
     }
 
     /**
+     * Get the associate that owns the quote.
+     */
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class);
+    }
+
+    /**
      * Get the line items for the quote.
      */
     public function line_items()
