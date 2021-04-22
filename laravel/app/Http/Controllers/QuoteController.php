@@ -81,7 +81,7 @@ class QuoteController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function view($id)
+    public function show($id)
     {
         $customers = Customer::all();
         $quote = Quote::find($id);
