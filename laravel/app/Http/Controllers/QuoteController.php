@@ -36,23 +36,6 @@ class QuoteController extends Controller
     }
 
     /**
-     * Create a new quote instance after a valid newquote submission.
-     *
-     * @param  array  $data
-     * @return \App\Models\Quote
-     */
-    protected function create(array $data)
-    {
-        $customer_name = Customer::find($data['customer_id'])->name;
-        return Quote::create([
-            'associate_id' => $data['associate_id'],
-            'customer_id' => $data['customer_id'],
-            'customer_email' => $data['customer_email'],
-            'customer_name' => $customer_name
-        ]);
-    }
-
-    /**
      * Handle a newquote request for the application.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -61,9 +44,14 @@ class QuoteController extends Controller
     public function store(Request $request)
     {
         $this->validator($request->all())->validate();
-
-        $quote = $this->create($request->all());
-        return redirect(route('quote', $quote->id));
+        $data = $request->all();
+        $quote = Quote::create([
+            'associate_id' => $data['associate_id'],
+            'customer_id' => $data['customer_id'],
+            'customer_email' => $data['customer_email'],
+            'customer_name' => \App\Models\Customer::find($data['customer_id'])->name
+        ]);
+        return redirect(route('quotes.edit', $quote->id));
     }
 
     /**
@@ -71,10 +59,10 @@ class QuoteController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function new()
+    public function create()
     {
         $customers = Customer::all();
-        return view('newquote', compact('customers'));
+        return view('quotes.create', compact('customers'));
     }
 
     /**
@@ -85,7 +73,22 @@ class QuoteController extends Controller
     public function index()
     {
         $quotes = Quote::all();
-        return view('quotes', compact('quotes'));
+        return view('quotes.index', compact('quotes'));
+    }
+
+    /**
+     * Show the quote info
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function show($id)
+    {
+        $quote = Quote::with('customer')->find($id);
+        $customer = $quote->customer;
+        $line_items = $quote->line_items;
+        $notes = $quote->notes->where('secret', false);
+        $secret_notes = $quote->notes->where('secret', true);
+        return view('quotes.show', compact('quote', 'customer', 'line_items', 'notes', 'secret_notes'));
     }
 
     /**
@@ -93,13 +96,34 @@ class QuoteController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function quote($id)
+    public function edit($id)
     {
         $customers = Customer::all();
         $quote = Quote::find($id);
         $line_items = $quote->line_items;
         $notes = $quote->notes->where('secret', false);
         $secret_notes = $quote->notes->where('secret', true);
-        return view('quote', compact('customers', 'quote', 'line_items', 'notes', 'secret_notes'));
+        return view('quotes.edit', compact('customers', 'quote', 'line_items', 'notes', 'secret_notes'));
+    }
+
+    /**
+     * Update the quote.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        $this->validator($request->all())->validate();
+        $data = $request->all();
+        $quote = Quote::find($id);
+        $quote->update([
+            'associate_id' => $data['associate_id'],
+            'customer_id' => $data['customer_id'],
+            'customer_email' => $data['customer_email'],
+            'customer_name' => \App\Models\Customer::find($data['customer_id'])->name
+        ]);
+        return $this->edit($id);
     }
 }

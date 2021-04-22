@@ -29,7 +29,7 @@
                                 <td>{{$quote->line_items->count()}}</td>
                                 <td>{{$quote->notes->count()}}</td>
                                 <td>{{$quote->status}}</td>
-                                <td>{{$quote->total_amount}}</td>
+                                <td class="text-right">${{number_format($quote->total_amount, 2)}}</td>
                                 <td>{{$quote->created_at->isoformat('MMMM DD')}}</td>
                                 <td>{{$quote->updated_at->isoformat('MMMM DD')}}</td>
                             </tr>

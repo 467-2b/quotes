@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('Add new quote') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('newquote') }}">
+                    <form method="POST">
                         @csrf
                         <input type="hidden" name="associate_id" value="{{ Auth::id() }}">
 

@@ -22,10 +22,14 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/customers', [App\Http\Controllers\HomeController::class, 'customers'])->name('customers');
 Route::get('/orders', [App\Http\Controllers\HomeController::class, 'orders'])->name('orders');
-Route::get('/quote/{id}', [App\Http\Controllers\QuoteController::class, 'quote'])->name('quote');
-Route::get('/quotes', [App\Http\Controllers\QuoteController::class, 'index'])->name('quotes');
-Route::get('/quotes/new', [App\Http\Controllers\QuoteController::class, 'new'])->name('newquote');
-Route::post('/quotes/new', [App\Http\Controllers\QuoteController::class, 'store']);
+// Quotes
+Route::get('/quotes', [App\Http\Controllers\QuoteController::class, 'index'])->name('quotes.index');
+Route::get('/quotes/create', [App\Http\Controllers\QuoteController::class, 'create'])->name('quotes.create');
+Route::post('/quotes/create', [App\Http\Controllers\QuoteController::class, 'store'])->name('quotes.store');
+Route::get('/quotes/{id}', [App\Http\Controllers\QuoteController::class, 'show'])->name('quotes.show');
+Route::get('/quotes/{id}/edit', [App\Http\Controllers\QuoteController::class, 'edit'])->name('quotes.edit');
+Route::post('/quotes/{id}/edit', [App\Http\Controllers\QuoteController::class, 'update'])->name('quotes.update');
+// Users
 Route::get('/users', function () {
     $users = \App\Models\User::all();
     return view('users', compact('users'));

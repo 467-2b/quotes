@@ -30,6 +30,14 @@ class Quote extends Model
     }
 
     /**
+     * Get the associate that owns the quote.
+     */
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class);
+    }
+
+    /**
      * Get the line items for the quote.
      */
     public function line_items()
@@ -43,5 +51,21 @@ class Quote extends Model
     public function notes()
     {
         return $this->hasMany(Note::class);
+    }
+
+    /**
+     * Get the total amount for this quote.
+     */
+    public function getTotalAmountAttribute()
+    {
+        return $this->line_items->sum('subtotal');
+    }
+
+    /**
+     * Get the total amount for this quote.
+     */
+    public function getFinalTotalAmountAfterDiscountsAttribute()
+    {
+        return $this->total_amount * (1 - $this->discount_percent) - $this->discount_amount;
     }
 }
