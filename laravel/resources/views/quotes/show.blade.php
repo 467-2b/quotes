@@ -140,16 +140,6 @@
                             @if(($quote->status == 'unfinalized' && Auth::user()->can('edit own quote') && $quote->associate_id = Auth::id()) || ($quote->status == 'finalized' && Auth::user()->can('edit finalized quote')))
                             <a href="{{ route('quotes.edit', $quote->id) }}" class="btn btn-primary btn-lg">Edit<a>
                             @endif
-                            @if($quote->status == 'unfinalized' && Auth::user()->can('edit own quote') && $quote->associate_id = Auth::id())
-                                <button type="submit" name="action" value="finalize" class="btn btn-success btn-lg">
-                                    {{ __('Finalize quote') }}
-                                </button>
-                            @endif
-                            @if($quote->status == 'finalized' && Auth::user()->can('sanction quote'))
-                                <button type="submit" name="action" value="sanction" class="btn btn-success btn-lg">
-                                    {{ __('Sanction quote') }}
-                                </button>
-                            @endif
                             </div>
                         </div>
                     </form>

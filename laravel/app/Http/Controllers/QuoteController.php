@@ -199,24 +199,29 @@ class QuoteController extends Controller
             'customer_id' => $data['customer_id'],
             'customer_email' => $data['customer_email'],
         ]);
-        $status = $quote->status;
-        if(!empty($data['action'])) {
-            switch($data['action']) {
-                case "finalize":
-                    $status = "finalized";
-                    break;
-                case "sanction":
-                    $status = "sanctioned";
-                    break;
-            }
-        }
-        $quote->update([
+        $update = [
             'associate_id' => $data['associate_id'],
             'customer_id' => $data['customer_id'],
             'customer_email' => $data['customer_email'],
             'customer_name' => \App\Models\Customer::find($data['customer_id'])->name,
-            'status' => $status,
-        ]);
+        ];
+        if(!empty($data['action'])) {
+            switch($data['action']) {
+                case "finalize":
+                    $update['status'] = "finalized";
+                    break;
+                case "sanction":
+                    $update['status'] = "sanctioned";
+                    break;
+            }
+        }
+        if(!empty($data['discount_percent'])) {
+            $update['discount_percent'] = $data['discount_percent'];
+        }
+        if(!empty($data['discount_amount'])) {
+            $update['discount_amount'] = $data['discount_amount'];
+        }
+        $quote->update($update);
         if(!empty($data['action'])) {
             if($data['action'] == 'finalize' && $quote->status == 'finalized') {
                 return redirect(route('quotes.show', $id));

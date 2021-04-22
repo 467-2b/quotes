@@ -116,8 +116,37 @@
                         <textarea class="form-control mb-4" id="note_new" name="secret_notes[]" style="width: 100%; max-width: 100%;" placeholder="Add secret notes"></textarea><input type="hidden" name="secret_note_ids[]" value="new" />
                     </div>
                 </div>
+        @if($quote->status == 'finalized' && Auth::user()->can('edit finalized quote'))
+                <div class="card">
+                    <div class="card-header text-center h4">Discounts</div>
+                    <div class="card-body">
+                        <div class="form-group row">
+                            <label for="discount_percent" class="col-md-4 col-form-label text-md-right">Percent discount</label>
+                            <div class="col-md-8">
+                                <input type="number" step="1" min="0" max="100" id="discount_percent" class="form-control @error('discount_percent') is-invalid @enderror" name="discount_percent" value="{{ $quote->discount_percent }}">
+                                @error('discount_percent')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="discount_amount" class="col-md-4 col-form-label text-md-right">Flat discount</label>
+                            <div class="col-md-8">
+                                <input type="number" step="0.01" id="discount_amount" class="form-control @error('discount_amount') is-invalid @enderror" name="discount_amount" value="{{ $quote->discount_amount }}">
+                                @error('discount_amount')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        @endif
 
-                @if(
+        @if(
             ($quote->status == 'unfinalized' && Auth::user()->can('edit own quote') && $quote->associate_id = Auth::id()) ||
             ($quote->status == 'finalized' && Auth::user()->can('edit finalized quote')) ||
             ($quote->status == 'finalized' && Auth::user()->can('sanction quote')) ||
