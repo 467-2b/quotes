@@ -138,7 +138,10 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
                             @if(($quote->status == 'unfinalized' && Auth::user()->can('edit own quote') && $quote->associate_id = Auth::id()) || ($quote->status == 'finalized' && Auth::user()->can('edit finalized quote')))
-                            <a href="{{ route('quotes.edit', $quote->id) }}" class="btn btn-primary btn-lg">Edit<a>
+                                <a href="{{ route('quotes.edit', $quote->id) }}" class="btn btn-primary btn-lg">Edit<a>
+                            @endif
+                            @if($quote->status == 'sanctioned' && Auth::user()->can('convert quote'))
+                                <a href="{{ route('quotes.convert-preview', $quote->id) }}" class="btn btn-success btn-lg">Convert to purchase order<a>
                             @endif
                             </div>
                         </div>

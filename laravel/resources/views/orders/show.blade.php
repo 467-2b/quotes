@@ -23,7 +23,7 @@
                             <label for="order_commission" class="col-md-4 col-form-label text-md-right">{{ __('Commission Rate') }}</label>
 
                             <div class="col-md-8">
-                                <span class="h5" id="order_commission">{{ $order->commission * 100}}%</span>
+                                <span class="h5" id="order_commission">{{ $order->commission_percent * 100}}%</span>
                             </div>
                         </div>
 

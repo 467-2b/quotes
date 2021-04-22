@@ -123,7 +123,7 @@
                         <div class="form-group row">
                             <label for="discount_percent" class="col-md-4 col-form-label text-md-right">Percent discount</label>
                             <div class="col-md-8">
-                                <input type="number" step="1" min="0" max="100" id="discount_percent" class="form-control @error('discount_percent') is-invalid @enderror" name="discount_percent" value="{{ $quote->discount_percent }}">
+                                <input type="number" step="1" min="0" max="100" id="discount_percent" class="form-control @error('discount_percent') is-invalid @enderror" name="discount_percent" value="{{ $quote->discount_percent * 100 }}">
                                 @error('discount_percent')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

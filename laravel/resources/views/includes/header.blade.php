@@ -17,7 +17,7 @@
                                 @endcan
                                 <li class="nav-item"><a class="nav-link" href="{{ route('quotes.index') }}">Quotes</a></li>
                                 @can('view processed order')
-                                <li class="nav-item"><a class="nav-link" href="{{ route('orders') }}">Orders</a></li>
+                                <li class="nav-item"><a class="nav-link" href="{{ route('orders.index') }}">Orders</a></li>
                                 @endcan
                                 <li class="nav-item"><a class="nav-link" href="{{ route('customers') }}">Customers</a></li>
                             @endauth

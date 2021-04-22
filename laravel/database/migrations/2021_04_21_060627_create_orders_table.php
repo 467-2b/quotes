@@ -17,6 +17,7 @@ class CreateOrdersTable extends Migration
             $table->id();
             $table->unsignedBigInteger('quote_id');
             $table->string('purchase_order_id');
+            $table->decimal('amount', 9, 2);
             $table->date('process_day');
             $table->decimal('commission_percent', 3, 2);
             $table->timestamps();

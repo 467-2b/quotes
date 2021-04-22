@@ -16,6 +16,7 @@ class Order extends Model
     protected $fillable = [
         'quote_id',
         'purchase_order_id',
+        'amount',
         'process_day',
         'commission_percent',
     ];

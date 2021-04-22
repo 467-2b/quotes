@@ -82,6 +82,61 @@ class QuoteController extends Controller
     }
 
     /**
+     * Show the quotes list
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function my_unfinalized()
+    {
+        $quotes = Quote::where([['associate_id', \Illuminate\Support\Facades\Auth::id()], ['status', 'unfinalized']])->get();
+        return view('quotes.index', compact('quotes'));
+    }
+
+    /**
+     * Show the quotes list
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function my_finalized()
+    {
+        $quotes = Quote::where([['associate_id', \Illuminate\Support\Facades\Auth::id()], ['status', 'finalized']])->get();
+        return view('quotes.index', compact('quotes'));
+    }
+
+    /**
+     * Show the quotes list
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function finalized()
+    {
+        $quotes = Quote::where('status', 'finalized')->get();
+        return view('quotes.index', compact('quotes'));
+    }
+
+    /**
+     * Show the quotes list
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function sanctioned()
+    {
+        $quotes = Quote::where('status', 'sanctioned')->get();
+        return view('quotes.index', compact('quotes'));
+    }
+
+    /**
+     * Show the quotes list
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function processed()
+    {
+        $quotes = Quote::where('status', 'processed')->get();
+        return view('quotes.index', compact('quotes'));
+    }
+
+    /**
      * Show the quote info
      *
      * @return \Illuminate\Contracts\Support\Renderable
@@ -216,7 +271,7 @@ class QuoteController extends Controller
             }
         }
         if(!empty($data['discount_percent'])) {
-            $update['discount_percent'] = $data['discount_percent'];
+            $update['discount_percent'] = ((double) intval($data['discount_percent'])) / 100.0;
         }
         if(!empty($data['discount_amount'])) {
             $update['discount_amount'] = $data['discount_amount'];
@@ -233,28 +288,42 @@ class QuoteController extends Controller
     }
 
     /**
+     * Preview converting a quote into an order
+     * 
+     * 
+     */
+    protected function convert_preview(int $quote_id)
+    {
+        $quote = Quote::find($quote_id);
+        $customer = $quote->customer;
+        $purchase_order_id = (string) Str::uuid();
+        return view('quotes.convert-preview', compact('quote', 'customer', 'purchase_order_id')); 
+    }
+
+    /**
      * Convert a quote into an order
      * 
      * 
      */
-    
-    protected function convert(int $quote_id)
+    protected function convert(Request $request, $quote_id)
     {
         $quote = Quote::find($quote_id);
-        $purchase_order_id = (string) Str::uuid();
-        $request = [
+        $request_data = $request->all();
+        $purchase_order_id = $request_data['purchase_order_id'];
+        $submission = [
             'order' => $purchase_order_id,
             'associate' => $quote->associate_id,
             'custid' => $quote->customer_id,
             'amount' => $quote->final_total_amount_after_discounts,
         ];
         $url = 'http://blitz.cs.niu.edu/PurchaseOrder/';
-        $response = Http::post($url, $request);
+        $response = Http::post($url, $submission);
         $data = [
             'quote_id' => $quote_id,
             'purchase_order_id' => $purchase_order_id,
+            'amount' => $response['amount'],
             'process_day' => \Carbon\Carbon::createFromFormat('Y/n/j', $response['processDay'])->format('Y-m-d'),
-            'commission_percent' => intval((string) $response['commission']) / 100,
+            'commission_percent' => (double) intval((string) $response['commission']) / 100.0,
         ];
         $order = \App\Models\Order::create([
             'quote_id' => $data['quote_id'],
@@ -262,7 +331,8 @@ class QuoteController extends Controller
             'process_day' => $data['process_day'],
             'commission_percent' => $data['commission_percent'],
         ]);
-        $earned_commission = round($request['amount'] * $data['commission_percent'], 2);
+        $quote->update(['status' => 'processed']);
+        $earned_commission = round($submission['amount'] * $data['commission_percent'], 2);
         $associate = User::find($quote->associate_id);
         $associate->increment('accumulated_commission', $earned_commission);
         return redirect(route('orders.show', $order->id)); 

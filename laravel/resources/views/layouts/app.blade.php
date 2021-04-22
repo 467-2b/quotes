@@ -40,7 +40,7 @@
                             @endcan
                             <li class="nav-item"><a class="nav-link{{ request()->routeIs('quotes.index') ? ' active' : '' }}" href="{{ route('quotes.index') }}">Quotes</a></li>
                             @can('view processed order')
-                            <li class="nav-item"><a class="nav-link{{ request()->routeIs('orders') ? ' active' : '' }}" href="{{ route('orders') }}">Orders</a></li>
+                            <li class="nav-item"><a class="nav-link{{ request()->routeIs('orders.index') ? ' active' : '' }}" href="{{ route('orders.index') }}">Orders</a></li>
                             @endcan
                             <li class="nav-item"><a class="nav-link{{ request()->routeIs('customers') ? ' active' : '' }}" href="{{ route('customers') }}">Customers</a></li>
                         @endauth

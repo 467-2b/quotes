@@ -35,6 +35,17 @@ class OrderController extends Controller
         ]);
     }
 
+    /**
+     * Show the orders list
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function index()
+    {
+        $orders = Order::with('quote')->get();
+        return view('orders.index', compact('orders'));
+    }
+
     public function create(array $data)
     {
         return Order::create([
