@@ -17,7 +17,7 @@ class Order extends Model
         'quote_id',
         'purchase_order_id',
         'process_day',
-        'commission',
+        'commission_percent',
     ];
 
     /**
