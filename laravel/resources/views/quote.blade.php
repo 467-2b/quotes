@@ -131,7 +131,7 @@
 </div>
 @endsection
 
-            <div id="myModal" class="modal" role="dialog">
+            <div id="myModal" class="modal hide fade" role="dialog" style="display:none;">
                 <div class="modal-dialog">
                     <!-- Modal content-->
                     <div class="modal-content">
@@ -321,7 +321,7 @@
                 'id': $('.did').text()
             },
             success: function(data) {
-                $('.item' + $('.did').text()).remove();
+                $('#item' + $('.did').text()).remove();
             }
         });
     });
