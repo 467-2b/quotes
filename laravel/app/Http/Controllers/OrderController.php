@@ -35,11 +35,23 @@ class OrderController extends Controller
         ]);
     }
 
+    /**
+     * Show the orders list
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function index()
+    {
+        $orders = Order::with('quote')->get();
+        return view('orders.index', compact('orders'));
+    }
+
     public function create(array $data)
     {
         return Order::create([
             'quote_id' => $data['quote_id'],
             'purchase_order_id' => $data['purchase_order_id'],
+            'amount' => $data['amount'],
             'process_day' => $data['process_day'],
             'commission' => $data['commission'],
         ]);

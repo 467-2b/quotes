@@ -34,7 +34,7 @@ class QuoteSeeder extends Seeder
                 'customer_name' => 'Bell South',
                 'customer_email' => 'bookkeeper@bellsouth.net',
                 'discount_amount' => 0.0,
-                'discount_percent' => 05,
+                'discount_percent' => 0.05,
                 'created_at' => \Carbon\Carbon::now()->subtract(5,'day'),
                 'updated_at' => \Carbon\Carbon::now(),
             ],

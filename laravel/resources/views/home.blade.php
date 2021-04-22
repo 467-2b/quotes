@@ -41,7 +41,7 @@
                     @endcan
                     @can('edit own quote')
                         <div class="p-2">
-                            <a href={{ route('quotes.index') }} alt="Edit Quotes" title="Edit Quotes" class="text-dark text-decoration-none">
+                            <a href={{ route('quotes.my-unfinalized') }} alt="Edit Quotes" title="Edit Quotes" class="text-dark text-decoration-none">
                                 <img src="/img/pencil-document.png" height=128 width=128 alt="Edit Quotes">
                                 <p class="text-center font-weight-bold">Edit Quotes</p>
                             </a>
@@ -49,7 +49,7 @@
                     @endcan
                     @can('finalize quote')
                         <div class="p-2">
-                            <a href={{ route('quotes.index') }} alt="Finalized Quotes" title="Finalized Quotes" class="text-dark text-decoration-none">
+                            <a href={{ route('quotes.my-finalized') }} alt="Finalized Quotes" title="Finalized Quotes" class="text-dark text-decoration-none">
                                 <img src="/img/locked.png" height=128 width=128 alt="Finalized Quotes">
                                 <p class="text-center font-weight-bold">Finalized Quotes</p>
                             </a>
@@ -57,7 +57,7 @@
                     @endcan
                     @can('edit finalized quote')
                         <div class="p-2">
-                            <a href={{ route('quotes.index') }} alt="Finalized Quotes" title="Finalized Quotes" class="text-dark text-decoration-none">
+                            <a href={{ route('quotes.finalized') }} alt="Finalized Quotes" title="Finalized Quotes" class="text-dark text-decoration-none">
                                 <img src="/img/documents.png" height=128 width=128 alt="Finalized Quotes">
                                 <p class="text-center font-weight-bold">Finalized Quotes</p>
                             </a>
@@ -65,7 +65,7 @@
                     @endcan
                     @can('sanction quote')
                         <div class="p-2">
-                            <a href={{ route('quotes.index') }} alt="Sanctioned Quotes" title="Sanctioned Quotes" class="text-dark text-decoration-none">
+                            <a href={{ route('quotes.sanctioned') }} alt="Sanctioned Quotes" title="Sanctioned Quotes" class="text-dark text-decoration-none">
                                 <img src="/img/approved.png" height=128 width=128 alt="Sanctioned Quotes">
                                 <p class="text-center font-weight-bold">Sanctioned Quotes</p>
                             </a>
@@ -81,7 +81,7 @@
                     @endcan
                     @can('view processed order')
                         <div class="p-2">
-                            <a href={{ route('orders') }} alt="Orders" title="Orders" class="text-dark text-decoration-none">
+                            <a href={{ route('orders.index') }} alt="Orders" title="Orders" class="text-dark text-decoration-none">
                                 <img src="/img/trolley.png" height=128 width=128 alt="Orders">
                                 <p class="text-center font-weight-bold">Orders</p>
                             </a>

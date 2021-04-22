@@ -17,13 +17,13 @@
                                 @endcan
                                 <li class="nav-item"><a class="nav-link" href="{{ route('quotes.index') }}">Quotes</a></li>
                                 @can('view processed order')
-                                <li class="nav-item"><a class="nav-link" href="{{ route('orders') }}">Orders</a></li>
+                                <li class="nav-item"><a class="nav-link" href="{{ route('orders.index') }}">Orders</a></li>
                                 @endcan
                                 <li class="nav-item"><a class="nav-link" href="{{ route('customers') }}">Customers</a></li>
                             @endauth
                         @endif
                     </ul>
-                    <ul class="navbar-nav ml-auto class="mt-2 mt-md-0" style="float:right">
+                    <ul class="navbar-nav ml-auto mt-2 mt-md-0" style="float:right">
                     @if (Route::has('login'))
                         @auth
                             <li class="nav-item dropdown">
