@@ -6,6 +6,19 @@
         <div class="col-md-10">
             <form method="POST">
                 <div class="card">
+                    <div class="card-header text-center h4">
+                    {{ __('Quote') }} {{ $quote->id }}
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group row">
+                            <label for="status" class="col-md-4 col-form-label text-md-right">{{ __('Quote Status') }}</label>
+                            <div class="col-md-8">
+                                <span class="h4" id="customer_name">{{ $quote->status }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
                     <div class="card-header text-center h4">{{ __('Customer Info') }}</div>
                     <div class="card-body">
                         @csrf
@@ -39,40 +52,42 @@
                                 @enderror
                             </div>
                         </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Update quote') }}
-                                </button>
-                            </div>
-                        </div>
                     </div>
                 </div>
             
                 <div class="card">
                     <div class="card-header text-center h4">Line items</div>
-                    <div class="card-body">
-                        <table class="table table-striped table-hover table-condensed">
+                    <div class="card-body table-responsive">
+                        <table class="table table-striped table-hover table-condensed" id="line-items">
                             <thead>
                             <tr>
                                 <th>Description</th>
-                                <th class="text-right">Price</th>
-                                <th class="text-right">Quantity</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
                             </tr>
                             </thead>
                             <tbody>
                             @foreach($line_items as $line_item)
                                 <tr>
-                                    <td>{{$line_item->description}}</td>
-                                    <td class="text-right">{{$line_item->price}}</td>
-                                    <td class="text-right">{{$line_item->quantity}}</td>
+                                    <td><input class="form-control" type="text" name="description[]" value="{{$line_item->description}}" /></td>
+                                    <td><input class="form-control" type="number" name="price[]" step="0.01" value="{{$line_item->price}}" /></td>
+                                    <td><input class="form-control" type="number" name="quantity[]" step="1" value="{{$line_item->price}}" /></td>
                                 </tr>
                             @endforeach
                                 <tr>
-                                    <td><input class="form-control" type="text" name="description" placeholder="Description"></td>
-                                    <td><input class="form-control" type="number" name="price" placeholder="Price"></td>
-                                    <td><input class="form-control" type="number" name="quantity" placeholder="Quantity"></td>
+                                    <td><input class="form-control" type="text" name="description[]" placeholder="Description" /></td>
+                                    <td><input class="form-control" type="number" name="price[]" step="0.01" placeholder="Price" /></td>
+                                    <td><input class="form-control" type="number" name="quantity[]" step="1" placeholder="Quantity" /></td>
+                                </tr>
+                                <tr>
+                                    <td><input class="form-control" type="text" name="description[]" placeholder="Description" /></td>
+                                    <td><input class="form-control" type="number" name="price[]" step="0.01" placeholder="Price" /></td>
+                                    <td><input class="form-control" type="number" name="quantity[]" step="1" placeholder="Quantity" /></td>
+                                </tr>
+                                <tr>
+                                    <td><input class="form-control" type="text" name="description[]" placeholder="Description" /></td>
+                                    <td><input class="form-control" type="number" name="price[]" step="0.01" placeholder="Price" /></td>
+                                    <td><input class="form-control" type="number" name="quantity[]" step="1" placeholder="Quantity" /></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -84,7 +99,7 @@
                     <div class="card-body">
                         @foreach($notes as $note)
                         <label for="note_{{ $note->id }}">{{ $note->created_at }}</label>
-                        <textarea class="form-control mb-4" id="note_{{ $note->id }}" name="notes" style="width: 100%; max-width: 100%;">{{ $note->text }}</textarea>
+                        <textarea class="form-control mb-4" id="note_{{ $note->id }}" name="notes[]" style="width: 100%; max-width: 100%;">{{ $note->text }}</textarea>
                         @endforeach
                         <textarea class="form-control mb-4" id="note_new" name="notes" style="width: 100%; max-width: 100%;" placeholder="Add notes"></textarea>
                     </div>
@@ -95,30 +110,43 @@
                     <div class="card-body">
                         @foreach($secret_notes as $note)
                         <label for="note_{{ $note->id }}">{{ $note->created_at }}</label>
-                        <textarea class="form-control mb-4" id="note_{{ $note->id }}" name="notes" style="width: 100%; max-width: 100%;">{{ $note->text }}</textarea>
+                        <textarea class="form-control mb-4" id="note_{{ $note->id }}" name="secret_notes[]"  style="width: 100%; max-width: 100%;">{{ $note->text }}</textarea>
                         @endforeach
                         <textarea class="form-control mb-4" id="note_new" name="notes" style="width: 100%; max-width: 100%;" placeholder="Add secret notes"></textarea>
                     </div>
                 </div>
 
-                <div class="card">
-                    <div class="card-header text-center h4">Actions</div>
-                    <div class="card-body">
-                        <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Update quote') }}
-                                </button>
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Update quote') }}
-                                </button>
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Update quote') }}
-                                </button>
-                            </div>
+                @if(
+            ($quote->status == 'unfinalized' && Auth::user()->can('edit own quote') && $quote->associate_id = Auth::id()) ||
+            ($quote->status == 'finalized' && Auth::user()->can('edit finalized quote')) ||
+            ($quote->status == 'finalized' && Auth::user()->can('sanction quote')) ||
+            ($quote->status == 'sanctioned' && Auth::user()->can('convert quote'))
+        )
+            <div class="card">
+                <div class="card-header text-center h4">Actions</div>
+                <div class="card-body">
+                    <div class="form-group row mb-0">
+                        <div class="col-md-8 offset-md-4">
+                        @if(($quote->status == 'unfinalized' && Auth::user()->can('edit own quote') && $quote->associate_id = Auth::id()) || ($quote->status == 'finalized' && Auth::user()->can('edit finalized quote')))
+                            <button type="submit" name="action" value="finalize" class="btn btn-primary btn-lg">
+                                {{ __('Save') }}
+                            </button>
+                        @endif
+                        @if($quote->status == 'unfinalized' && Auth::user()->can('edit own quote') && $quote->associate_id = Auth::id())
+                            <button type="submit" name="action" value="finalize" class="btn btn-success btn-lg">
+                                {{ __('Finalize quote') }}
+                            </button>
+                        @endif
+                        @if($quote->status == 'finalized' && Auth::user()->can('sanction quote'))
+                            <button type="submit" name="action" value="sanction" class="btn btn-success btn-lg">
+                                {{ __('Sanction quote') }}
+                            </button>
+                        @endif
                         </div>
                     </div>
                 </div>
+            </div>
+        @endif
             </form>
         </div>
     </div>

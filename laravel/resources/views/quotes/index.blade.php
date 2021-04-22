@@ -11,6 +11,7 @@
                     <table class="table table-striped ">
                         <thead class="thead-dark">
                             <tr>
+                                <th scope="col">ID</th>
                                 <th scope="col">Customer</th>
                                 <th scope="col">Associate</th>
                                 <th scope="col">Items</th>
@@ -24,6 +25,7 @@
                         <tbody>
                             @foreach($quotes as $quote)
                             <tr>
+                                <td><a href="{{ route('quotes.show', $quote->id) }}">{{$quote->id}}</a></td>
                                 <td>{{$quote->customer_name}}</td>
                                 <td>{{$quote->associate->name}}</td>
                                 <td>{{$quote->line_items->count()}}</td>

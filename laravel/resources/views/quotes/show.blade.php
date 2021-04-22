@@ -6,6 +6,19 @@
         <div class="col-md-10">
             <div class="card">
                 <div class="card-header text-center h4">
+                {{ __('Quote') }} {{ $quote->id }}
+                </div>
+                <div class="card-body">
+                    <div class="form-group row">
+                        <label for="status" class="col-md-4 col-form-label text-md-right">{{ __('Quote Status') }}</label>
+                        <div class="col-md-8">
+                            <span class="h4" id="customer_name">{{ $quote->status }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header text-center h4">
                 {{ __('Customer Info') }}
                 </div>
                 <div class="card-body">
@@ -111,6 +124,38 @@
                     @endforeach
                 </div>
             </div>
+        @if(
+            ($quote->status == 'unfinalized' && Auth::user()->can('edit own quote') && $quote->associate_id = Auth::id()) ||
+            ($quote->status == 'finalized' && Auth::user()->can('edit finalized quote')) ||
+            ($quote->status == 'finalized' && Auth::user()->can('sanction quote')) ||
+            ($quote->status == 'sanctioned' && Auth::user()->can('convert quote'))
+        )
+            <div class="card">
+                <div class="card-header text-center h4">Actions</div>
+                <div class="card-body">
+                    <form action="{{ route('quotes.edit', $quote->id) }}" method="POST">
+                        @csrf
+                        <div class="form-group row mb-0">
+                            <div class="col-md-8 offset-md-4">
+                            @if(($quote->status == 'unfinalized' && Auth::user()->can('edit own quote') && $quote->associate_id = Auth::id()) || ($quote->status == 'finalized' && Auth::user()->can('edit finalized quote')))
+                            <a href="{{ route('quotes.edit', $quote->id) }}" class="btn btn-primary btn-lg">Edit<a>
+                            @endif
+                            @if($quote->status == 'unfinalized' && Auth::user()->can('edit own quote') && $quote->associate_id = Auth::id())
+                                <button type="submit" name="action" value="finalize" class="btn btn-success btn-lg">
+                                    {{ __('Finalize quote') }}
+                                </button>
+                            @endif
+                            @if($quote->status == 'finalized' && Auth::user()->can('sanction quote'))
+                                <button type="submit" name="action" value="sanction" class="btn btn-success btn-lg">
+                                    {{ __('Sanction quote') }}
+                                </button>
+                            @endif
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        @endif
         </div>
     </div>
 </div>
