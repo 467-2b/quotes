@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Customer;
+use App\Models\LineItem;
+use App\Models\Note;
 use App\Models\Quote;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
@@ -118,15 +120,110 @@ class QuoteController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validator($request->all())->validate();
         $data = $request->all();
         $quote = Quote::find($id);
+        $num_line_items = count($data['line_item_ids']);
+        $num_notes = count($data['note_ids']);
+        $num_secret_notes = count($data['secret_note_ids']);
+
+        // Update line items
+        for($i = 0; $i < $num_line_items; $i++) {
+            if($data['line_item_ids'][$i] == "new") {
+                if(!empty($data['description'][$i]) && !empty($data['price'][$i]) && !empty($data['quantity'][$i]) && $data['quantity'][$i] != 0) {
+                    $line_item = LineItem::create([
+                        'quote_id' => $quote->id,
+                        'description' => $data['description'][$i],
+                        'price' => $data['price'][$i],
+                        'quantity' => $data['quantity'][$i],
+                    ]);
+                }
+            } else {
+                $line_item = LineItem::find($data['line_item_ids'][$i]);
+                if($data['quantity'][$i] == 0) {
+                    $line_item->delete();
+                } elseif($line_item->description != $data['description'][$i] || $line_item->price != $data['price'][$i]  || $line_item->quantity != $data['quantity'][$i]) {
+                    $line_item->update([
+                        'description' => $data['description'][$i],
+                        'price' => $data['price'][$i],
+                        'quantity' => $data['quantity'][$i],
+                    ]);
+                }
+            }
+        }
+        
+        // Update notes
+        for($i = 0; $i < $num_notes; $i++) {
+            if($data['note_ids'][$i] == "new") {
+                if(!empty($data['notes'][$i])) {
+                    $line_item = Note::create([
+                        'quote_id' => $quote->id,
+                        'secret' => false,
+                        'text' => $data['notes'][$i],
+                    ]);
+                }
+            } else {
+                $note = Note::find($data['note_ids'][$i]);
+                if(empty($data['notes'][$i])) {
+                    $note->delete();
+                } else {
+                    $note->update([
+                        'text' => $data['notes'][$i],
+                    ]);
+                }
+            }
+        }
+        
+        // Update secret notes
+        for($i = 0; $i < $num_secret_notes; $i++) {
+            if($data['secret_note_ids'][$i] == "new") {
+                if(!empty($data['secret_notes'][$i])) {
+                    $line_item = Note::create([
+                        'quote_id' => $quote->id,
+                        'secret' => true,
+                        'text' => $data['secret_notes'][$i],
+                    ]);
+                }
+            } else {
+                $note = Note::find($data['secret_note_ids'][$i]);
+                if(empty($data['secret_notes'][$i])) {
+                    $note->delete();
+                } else {
+                    $note->update([
+                        'text' => $data['secret_notes'][$i],
+                    ]);
+                }
+            }
+        }
+        $this->validator($data)->validate([
+            'associate_id' => $data['associate_id'],
+            'customer_id' => $data['customer_id'],
+            'customer_email' => $data['customer_email'],
+        ]);
+        $status = $quote->status;
+        if(!empty($data['action'])) {
+            switch($data['action']) {
+                case "finalize":
+                    $status = "finalized";
+                    break;
+                case "sanction":
+                    $status = "sanctioned";
+                    break;
+            }
+        }
         $quote->update([
             'associate_id' => $data['associate_id'],
             'customer_id' => $data['customer_id'],
             'customer_email' => $data['customer_email'],
-            'customer_name' => \App\Models\Customer::find($data['customer_id'])->name
+            'customer_name' => \App\Models\Customer::find($data['customer_id'])->name,
+            'status' => $status,
         ]);
+        if(!empty($data['action'])) {
+            if($data['action'] == 'finalize' && $quote->status == 'finalized') {
+                return redirect(route('quotes.show', $id));
+            } elseif ($data['action'] == 'sanction' && $quote->status == 'sanctioned') {
+                return redirect(route('quotes.show', $id));
+            }
+        }
         return $this->edit($id);
     }
 

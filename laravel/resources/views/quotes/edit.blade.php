@@ -5,6 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-10">
             <form method="POST">
+                <input type="hidden" name="associate_id" value="{{ $quote->associate_id }}" />
                 <div class="card">
                     <div class="card-header text-center h4">
                     {{ __('Quote') }} {{ $quote->id }}
@@ -69,23 +70,23 @@
                             <tbody>
                             @foreach($line_items as $line_item)
                                 <tr>
-                                    <td><input class="form-control" type="text" name="description[]" value="{{$line_item->description}}" /></td>
-                                    <td><input class="form-control" type="number" name="price[]" step="0.01" value="{{$line_item->price}}" /></td>
-                                    <td><input class="form-control" type="number" name="quantity[]" step="1" value="{{$line_item->price}}" /></td>
+                                    <td><input class="form-control" type="text" name="description[]" value="{{$line_item->description}}" /><input type="hidden" name="line_item_ids[]" value="{{$line_item->id}}" /></td>
+                                    <td><input class="form-control" type="number" name="price[]" step="0.01" value="{{number_format($line_item->price, 2)}}" /></td>
+                                    <td><input class="form-control" type="number" name="quantity[]" step="1" value="{{$line_item->quantity}}" /></td>
                                 </tr>
                             @endforeach
                                 <tr>
-                                    <td><input class="form-control" type="text" name="description[]" placeholder="Description" /></td>
+                                    <td><input class="form-control" type="text" name="description[]" placeholder="Description" /><input type="hidden" name="line_item_ids[]" value="new" /></td>
                                     <td><input class="form-control" type="number" name="price[]" step="0.01" placeholder="Price" /></td>
                                     <td><input class="form-control" type="number" name="quantity[]" step="1" placeholder="Quantity" /></td>
                                 </tr>
                                 <tr>
-                                    <td><input class="form-control" type="text" name="description[]" placeholder="Description" /></td>
+                                    <td><input class="form-control" type="text" name="description[]" placeholder="Description" /><input type="hidden" name="line_item_ids[]" value="new" /></td>
                                     <td><input class="form-control" type="number" name="price[]" step="0.01" placeholder="Price" /></td>
                                     <td><input class="form-control" type="number" name="quantity[]" step="1" placeholder="Quantity" /></td>
                                 </tr>
                                 <tr>
-                                    <td><input class="form-control" type="text" name="description[]" placeholder="Description" /></td>
+                                    <td><input class="form-control" type="text" name="description[]" placeholder="Description" /><input type="hidden" name="line_item_ids[]" value="new" /></td>
                                     <td><input class="form-control" type="number" name="price[]" step="0.01" placeholder="Price" /></td>
                                     <td><input class="form-control" type="number" name="quantity[]" step="1" placeholder="Quantity" /></td>
                                 </tr>
@@ -99,9 +100,9 @@
                     <div class="card-body">
                         @foreach($notes as $note)
                         <label for="note_{{ $note->id }}">{{ $note->created_at }}</label>
-                        <textarea class="form-control mb-4" id="note_{{ $note->id }}" name="notes[]" style="width: 100%; max-width: 100%;">{{ $note->text }}</textarea>
+                        <textarea class="form-control mb-4" id="note_{{ $note->id }}" name="notes[]" style="width: 100%; max-width: 100%;">{{ $note->text }}</textarea><input type="hidden" name="note_ids[]" value="{{$note->id}}" />
                         @endforeach
-                        <textarea class="form-control mb-4" id="note_new" name="notes" style="width: 100%; max-width: 100%;" placeholder="Add notes"></textarea>
+                        <textarea class="form-control mb-4" id="note_new" name="notes[]" style="width: 100%; max-width: 100%;" placeholder="Add notes"></textarea><input type="hidden" name="note_ids[]" value="new" />
                     </div>
                 </div>
                 
@@ -110,9 +111,9 @@
                     <div class="card-body">
                         @foreach($secret_notes as $note)
                         <label for="note_{{ $note->id }}">{{ $note->created_at }}</label>
-                        <textarea class="form-control mb-4" id="note_{{ $note->id }}" name="secret_notes[]"  style="width: 100%; max-width: 100%;">{{ $note->text }}</textarea>
+                        <textarea class="form-control mb-4" id="note_{{ $note->id }}" name="secret_notes[]"  style="width: 100%; max-width: 100%;">{{ $note->text }}</textarea></textarea><input type="hidden" name="secret_note_ids[]" value="{{$note->id}}" />
                         @endforeach
-                        <textarea class="form-control mb-4" id="note_new" name="notes" style="width: 100%; max-width: 100%;" placeholder="Add secret notes"></textarea>
+                        <textarea class="form-control mb-4" id="note_new" name="secret_notes[]" style="width: 100%; max-width: 100%;" placeholder="Add secret notes"></textarea><input type="hidden" name="secret_note_ids[]" value="new" />
                     </div>
                 </div>
 
@@ -128,11 +129,11 @@
                     <div class="form-group row mb-0">
                         <div class="col-md-8 offset-md-4">
                         @if(($quote->status == 'unfinalized' && Auth::user()->can('edit own quote') && $quote->associate_id = Auth::id()) || ($quote->status == 'finalized' && Auth::user()->can('edit finalized quote')))
-                            <button type="submit" name="action" value="finalize" class="btn btn-primary btn-lg">
+                            <button type="submit" name="action" value="save" class="btn btn-primary btn-lg">
                                 {{ __('Save') }}
                             </button>
                         @endif
-                        @if($quote->status == 'unfinalized' && Auth::user()->can('edit own quote') && $quote->associate_id = Auth::id())
+                        @if($quote->status == 'unfinalized' && Auth::user()->can('finalize quote') && $quote->associate_id = Auth::id())
                             <button type="submit" name="action" value="finalize" class="btn btn-success btn-lg">
                                 {{ __('Finalize quote') }}
                             </button>

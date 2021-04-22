@@ -11,6 +11,18 @@ class LineItem extends Model
     use HasFactory;
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'quote_id',
+        'description',
+        'price',
+        'quantity',
+    ];
+
+    /**
      * Get the quote that this line item is part of.
      */
     public function quote()

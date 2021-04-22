@@ -19,6 +19,7 @@ class Quote extends Model
         'customer_id',
         'customer_name',
         'customer_email',
+        'status',
     ];
 
     /**
