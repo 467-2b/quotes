@@ -70,9 +70,9 @@
                             <tbody>
                             @foreach($line_items as $line_item)
                                 <tr>
-                                    <td><input class="form-control" type="text" name="description[]" value="{{$line_item->description}}" /><input type="hidden" name="line_item_ids[]" value="{{$line_item->id}}" /></td>
-                                    <td><input class="form-control" type="number" name="price[]" step="0.01" value="{{number_format($line_item->price, 2)}}" /></td>
-                                    <td><input class="form-control" type="number" name="quantity[]" step="1" value="{{$line_item->quantity}}" /></td>
+                                    <td><input class="form-control" type="text" name="description[]" value="{{ $line_item->description }}" /><input type="hidden" name="line_item_ids[]" value="{{ $line_item->id }}" /></td>
+                                    <td><input class="form-control" type="number" name="price[]" step="0.01" value="{{ $line_item->price }}" /></td>
+                                    <td><input class="form-control" type="number" name="quantity[]" step="1" value="{{ $line_item->quantity }}" /></td>
                                 </tr>
                             @endforeach
                                 <tr>

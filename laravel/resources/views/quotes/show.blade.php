@@ -67,7 +67,7 @@
                         @foreach($line_items as $line_item)
                             <tr>
                                 <td>{{$line_item->description}}</td>
-                                <td class="text-right">{{ $line_item->price }}</td>
+                                <td class="text-right">{{ number_format($line_item->price, 2) }}</td>
                                 <td class="text-right">{{ $line_item->quantity }}</td>
                                 <td class="text-right">${{ number_format($line_item->subtotal, 2) }}</td>
                             </tr>
