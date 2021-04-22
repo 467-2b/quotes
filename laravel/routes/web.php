@@ -46,3 +46,4 @@ Route::get('/user/{id}', function ($id) {
 Route::post('/user/{id}', [App\Http\Controllers\Auth\RegisterController::class, 'update'])->name('user.update');
 Route::get('/orders', [App\Http\Controllers\OrderController::class, 'index'])->name('orders.index');
 Route::get('/orders/{id}', [App\Http\Controllers\OrderController::class, 'show'])->name('orders.show');
+Route::delete('/user/{id}', [App\Http\Controllers\Auth\RegisterController::class, 'destroy'])->name('users.destroy');
