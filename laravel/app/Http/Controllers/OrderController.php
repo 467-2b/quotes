@@ -51,6 +51,7 @@ class OrderController extends Controller
         return Order::create([
             'quote_id' => $data['quote_id'],
             'purchase_order_id' => $data['purchase_order_id'],
+            'amount' => $data['amount'],
             'process_day' => $data['process_day'],
             'commission' => $data['commission'],
         ]);

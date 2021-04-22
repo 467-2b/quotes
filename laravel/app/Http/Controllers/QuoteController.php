@@ -331,6 +331,7 @@ class QuoteController extends Controller
         $order = \App\Models\Order::create([
             'quote_id' => $data['quote_id'],
             'purchase_order_id' => $data['purchase_order_id'],
+            'amount' => $data['amount'],
             'process_day' => $data['process_day'],
             'commission_percent' => $data['commission_percent'],
         ]);
