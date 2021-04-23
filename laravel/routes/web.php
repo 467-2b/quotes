@@ -34,6 +34,12 @@ Route::get('/quotes/{id}/convert', [App\Http\Controllers\QuoteController::class,
 Route::post('/quotes/{id}/convert', [App\Http\Controllers\QuoteController::class, 'convert'])->name('quotes.convert');
 Route::get('/quotes/{id}/edit', [App\Http\Controllers\QuoteController::class, 'edit'])->name('quotes.edit');
 Route::post('/quotes/{id}/edit', [App\Http\Controllers\QuoteController::class, 'update'])->name('quotes.update');
+Route::post('/quotes/{id}/sanction', [App\Http\Controllers\QuoteController::class, 'sanction'])->name('quotes.sanction');
+Route::get('/quotes/{id}/emailpreview', [App\Http\Controllers\QuoteController::class, 'email_preview'])->name('quotes.email-preview');
+Route::get('/quotes/{id}/emailpreviewraw', function ($id) {
+    $quote = \App\Models\Quote::with('customer', 'line_items', 'notes')->find($id);
+    return new \App\Mail\QuoteMessage($quote);
+})->name('quotes.email-preview-raw');
 // Users
 Route::get('/users', function () {
     $users = \App\Models\User::all();

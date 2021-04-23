@@ -287,9 +287,34 @@ class QuoteController extends Controller
         return $this->edit($id);
     }
 
+   /**
+     * Sanction the quote and send an email.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function sanction(Request $request, $id)
+    {
+        $data = $request->all();
+        $quote = Quote::with('customer', 'line_items', 'notes')->find($id);
+        // Send email
+        \Illuminate\Support\Facades\Mail::to($quote->customer_email)->send(new \App\Mail\QuoteMessage($quote));
+        $quote->update(['status' => 'sanctioned']);
+        return redirect(route('quotes.show', $id));
+    }
+
+    /**
+     * Preview a quote email
+     * 
+     */
+    protected function email_preview($id)
+    {
+        return view('quotes.email-preview', compact('id')); 
+    }
+
     /**
      * Preview converting a quote into an order
-     * 
      * 
      */
     protected function convert_preview(int $quote_id)

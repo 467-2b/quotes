@@ -8,7 +8,18 @@
             <div class="card">
                 <div class="card-header text-center"><h4>{{ __('Quotes') }}</h4></div>
                 <div class="card-body">
-                    <table class="table table-striped ">
+                @role('admin')
+                <div>
+                <select id="statusFilter" class = "form-control" style="width:150px;">
+                    <option value="">Any status</option>
+                    <option value="unfinalized">unfinalized</option>
+                    <option value="finalized">finalized</option>
+                    <option value="sanctioned">sanctioned</option>
+                    <option value="processed">processed</option>
+                </select>
+                @endrole
+                </div>
+                    <table class="table table-striped " id="quotesTable">
                         <thead class="thead-dark">
                             <tr>
                                 <th scope="col">ID</th>
@@ -45,3 +56,42 @@
 </div>
 
 @endsection
+@role('admin')
+@push('script')
+    <script src="//code.jquery.com/jquery-1.12.3.js" ></script>
+    <script src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js" defer></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css" defer/>
+    <script>
+    $(document).ready(function() {
+        $('#quotesTable').DataTable({
+            "searching":true
+        });
+        var table = $('#quotesTable').DataTable();
+        $("#quotesTable_filter.dataTables_filter").append($("#statusFilter"));
+        var categoryIndex = 0;
+      $("#quotesTable th").each(function (i) 
+      {
+        if ($($(this)).html() == "Status") 
+        {
+          statusIndex = i; 
+          return false;
+        }
+      });
+      $.fn.dataTable.ext.search.push(
+        function (settings, data, dataIndex) {
+          var selected = $('#statusFilter').val()
+          var status = data[statusIndex];
+          if (selected === "" || status === selected) {
+            return true;
+          }
+          return false;
+        }
+      );
+      $("#statusFilter").change(function (e) {
+        table.draw();
+      });
+      table.draw();
+    });
+    </script>
+@endpush
+@endrole
