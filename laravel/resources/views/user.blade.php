@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@extends('\app\Http\Controllers\Auth\RegisterController.php')
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -120,7 +120,21 @@
                                 </button>
                             </div>
                         </div>
+
                     </form>
+
+                    <form action="{{ route('api.users.destroy', $user->id)}}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                        <div class="form-group row mb-0">
+                                <div class="col-md-6 offset-md-4">
+                                    <button type="submit" class="btn btn-danger">
+                                        <div>{{ __('Delete User') }}</div>
+                                    </button>
+                                </div>
+                            </div>
+                    </form>
+
                 </div>
             </div>
         </div>

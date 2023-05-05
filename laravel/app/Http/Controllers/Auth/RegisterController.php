@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-
+use Illuminate\Support\Facades\Response;
 
 class RegisterController extends Controller
 {
@@ -125,5 +125,32 @@ class RegisterController extends Controller
         $user->syncRoles([$data['role']]);
 
         return view('user', compact('user'));
+    }
+
+    /**
+     * Destroy the specified resource in storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $res=User::find($id)->delete();
+        //check to see if the user was deleted correctly
+        if ($res)
+        {
+            $data=[
+                'status'=>'1',
+                'msg'=>'success'
+            ];
+        }
+        else
+        {
+          $data=[
+            'status'=>'0',
+            'msg'=>'fail'
+            ];
+        }
+        return redirect('/users')->with('success', 'User has been deleted');
     }
 }
